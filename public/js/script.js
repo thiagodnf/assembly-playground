@@ -2,17 +2,19 @@ let cpu;
 let romMemory;
 let ramMemory;
 
+let codeEditor;
+
 let BITS = 4;
 let REGISTORS = 5;
 let MEMORY_SIZE = 16;
 
-let codeEditor;
 
-Number.prototype.toHex = function(f){
+
+Number.prototype.toHex = function (f) {
     return ConvertUtils.toHex(this);
 }
 
-String.prototype.toHex = function(f){
+String.prototype.toHex = function (f) {
     return ConvertUtils.toHex(parseInt(this));
 }
 
@@ -21,6 +23,7 @@ function loadExample() {
     let text = `
         MOV #10, R0
         MOV #20, R1
+        SUB #20, R1
         JMP 0
     `;
 
@@ -42,8 +45,19 @@ function loadCode(code) {
 }
 
 function resizeWindow() {
-    var h = $(window).height();
-    $(".max-height").height(h - 170);
+
+    const w = $(window).height();
+
+    $(".panels").height(w - 150);
+
+    $(".panel-ram-memory").height($(".panels").height());
+    $(".panel-rom-memory").height($(".panels").height());
+    $(".panel-left").height($(".panels").height());
+
+    $(".panel-source-code").height($(".panel-left").height() * 0.75);
+    $(".panel-cpu").height($(".panel-left").height() * 0.75);
+
+    $(".panel-output").height($(".panel-left").height() * 0.25 -20);
 }
 
 $(function () {
@@ -62,7 +76,15 @@ $(function () {
         loadCode(codeEditor.getValue());
     })
 
-    $("#step").click(() => cpu.step());
+    $("#step").click(() => {cpu.step()});
 
     $(window).resize(resizeWindow).trigger('resize');
+
+    window.onerror = function(message, url, lineNumber) {
+        OutputUtils.error(message);
+        //save error and send to server for example.
+        return true;
+    };
+
+    OutputUtils.msg("Welcome!");
 });

@@ -35,4 +35,30 @@ class InstructionUtils {
 
         return false;
     }
+
+    static isRegister(str) {
+        return str.startsWith("R");
+    }
+
+    static isImmediate(str) {
+        return str.startsWith("#");
+    }
+
+    static isMemory(str) {
+        return str.startsWith("[") && str.endsWith("]");
+    }
+
+    static getValue(cpu, operand){
+
+        if (InstructionUtils.isImmediate(operand)) {
+            return parseInt(src.replace("#", ""));
+        } else if (InstructionUtils.isMemory(operand)) {
+            const pos = parseInt(src.replace("\[", "").replace("\]", ""));
+            return cpu.ramMemory.getValue(pos);
+        } else if (InstructionUtils.isRegister(operand)) {
+            return cpu.getRegistor(src);
+        }
+
+        throw new Error("The value is wrong");
+    }
 }

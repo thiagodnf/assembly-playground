@@ -28,7 +28,6 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
                 </div>
             </div>
         </nav>
@@ -36,45 +35,53 @@
     <main>
         <div class="container-fluid">
             <div >
-                <div class="btn-group" >
-                    <button class="btn btn-primary" id="load"><i class="bi me-2 bi-box-arrow-in-up"></i>Load</button>
-                    <button class="btn btn-primary"id="step"><i class="bi me-2 bi-chevron-bar-right"></i>Step</button>
-                </div>
-            </form>
-            <div class="row mt-3">
-                <div class="col-3">
-                    <div class="card">
-                        <div class="card-header">
-                            Source Code
+                <button class="btn btn-primary" id="load"><i class="bi me-2 bi-box-arrow-in-up"></i>Load</button>
+                <button class="btn btn-primary"id="step"><i class="bi me-2 bi-chevron-bar-right"></i>Step</button>
+            </div>
+            <div class="row mt-3 panels">
+                <div class="col-6 panel-left">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="card panel-source-code">
+                                <div class="card-header">Source Code</div>
+                                <div class="card-body">
+                                    <div id="codeEditor"></div>
+                                </div>
+                            </div>
                         </div>
-                        <div id="codeEditor" class="max-height"></div>
+                        <div class="col-6">
+                            <div class="card panel-cpu">
+                                <div class="card-header">CPU</div>
+                                <div class="card-body">
+                                    <table class="table table-sm" id="cpu">
+                                        <thead>
+                                            <tr>
+                                                <th width="50%">Registor</th>
+                                                <th width="50%">Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <div class="card panel-output">
+                                <div class="card-header">Output</div>
+                                <div class="card-body" id="output">
+                                    <!-- <textarea id="output"></textarea> -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-3">
-                    <div class="card">
-                        <div class="card-header">
-                            CPU
-                        </div>
-                        <div class="max-height">
-                            <table class="table table-sm" id="cpu">
-                                <thead>
-                                    <tr>
-                                        <th width="50%">Registor</th>
-                                        <th width="50%">Value</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="card">
-                        <div class="card-header">
-                            ROM Memory
-                        </div>
-                        <div class="max-height">
+                    <div class="card panel-rom-memory">
+                        <div class="card-header">ROM Memory</div>
+                        <div class="card-body">
                             <table class="table  table-sm" id="rom-memory">
                                 <thead>
                                     <tr>
@@ -89,11 +96,9 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div class="card">
-                        <div class="card-header">
-                            RAM Memory
-                        </div>
-                        <div class="max-height">
+                    <div class="card panel-ram-memory">
+                        <div class="card-header">RAM Memory</div>
+                        <div class="card-body">
                             <table class="table  table-sm" id="ram-memory">
                                 <thead>
                                     <tr>
@@ -125,6 +130,7 @@
     <script type="text/javascript" src="public/js/utils/table-utils.js"></script>
     <script type="text/javascript" src="public/js/utils/instruction-utils.js"></script>
     <script type="text/javascript" src="public/js/utils/convert-utils.js"></script>
+    <script type="text/javascript" src="public/js/utils/output-utils.js"></script>
 
     <script type="text/javascript" src="public/js/pc/instructions/mov.js"></script>
     <script type="text/javascript" src="public/js/pc/instructions/add.js"></script>
