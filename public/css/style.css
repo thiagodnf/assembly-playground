@@ -2,7 +2,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-image: linear-gradient(rgba(255, 255, 255, 0.01), rgb(255, 255, 255) 85%), radial-gradient(at left top, rgba(13, 110, 253, 0.5), transparent 50%), radial-gradient(at right top, rgba(255, 228, 132, 0.5), transparent 50%), radial-gradient(at right center, rgba(113, 44, 249, 0.5), transparent 50%), radial-gradient(at left center, rgba(214, 51, 132, 0.5), transparent 50%);
-    padding-top: 70px;
+    padding-top: 75px;
     font-size: 14px;
 }
 
@@ -14,7 +14,6 @@ body {
     width: 100%;
     height: 400px;
 }
-
 
 table td, table th {
     border: 1px solid lightgray;
@@ -52,16 +51,6 @@ table tr td:last-child, table tr th:last-child {
 }
 
 .btn-primary:hover{
-    background-color: #6419f8 !important;
-}
-
-.btn-outline-primary{
-    /* background-color: #712cf9; */
-    color: #712cf9;
-    border-color: #712cf9;
-}
-
-.btn-outline-primary:hover{
     border-color: #712cf9 !important;
     background-color: #6419f8 !important;
 }

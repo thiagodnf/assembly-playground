@@ -35,15 +35,20 @@
     </header>
     <main>
         <div class="container-fluid">
-            <form class="mb-2">
-                <a class="btn btn-primary btn-sm me-2" href="#" id="load">Load</a>
-                <a class="btn btn-outline-primary btn-sm me-auto" href="#" id="step">Step</a>
-                <a class="btn btn-outline-primary btn-sm float-end" href="#" id="reset">Reset</a>
+            <div >
+                <div class="btn-group" >
+                    <button class="btn btn-primary" id="load"><i class="bi me-2 bi-box-arrow-in-up"></i>Load</button>
+                    <button class="btn btn-primary"id="step"><i class="bi me-2 bi-chevron-bar-right"></i>Step</button>
+                </div>
             </form>
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col-3">
-
-                    <div id="codeEditor" class="max-height"></div>
+                    <div class="card">
+                        <div class="card-header">
+                            Source Code
+                        </div>
+                        <div id="codeEditor" class="max-height"></div>
+                    </div>
                 </div>
                 <div class="col-3">
                     <div class="card">

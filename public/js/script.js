@@ -62,7 +62,6 @@ $(function () {
         loadCode(codeEditor.getValue());
     })
 
-    $("#reset").click(reset);
     $("#step").click(() => cpu.step());
 
     $(window).resize(resizeWindow).trigger('resize');
