@@ -1,6 +1,6 @@
 class TableUtils {
 
-    static removeAllRows($table){
+    static removeAllRows($table) {
         $table.find("tbody tr").remove();
     }
 
@@ -26,7 +26,7 @@ class TableUtils {
         for (let i = 1; i < rowspan; i++) {
             rows.push(`
                 <tr>
-                    <td>${(id+1)}</td>
+                    <td>${(id + 1)}</td>
                 </tr>
             `);
         }
@@ -37,22 +37,32 @@ class TableUtils {
 
     static appendMemoryRow(table, addressAsInt, value, rowspan = 1) {
 
-        let address = addressAsInt.toHex();
+        let convertedAddress;
+        let nextConvertedAddress;
+
+        if (Settings.getMemoryAddressAs() === "decimal") {
+            convertedAddress = addressAsInt;
+            nextConvertedAddress = addressAsInt + 1;
+        } else if (Settings.getMemoryAddressAs() === "hex") {
+            convertedAddress = ConvertUtils.toHex(addressAsInt);
+            nextConvertedAddress = ConvertUtils.toHex(addressAsInt + 1);
+        }
 
         let rows = [`
             <tr>
-                <td>${address}</td>
+                <td>${convertedAddress}</td>
                 <td rowspan="${rowspan}">${value}</td>
             </tr>
         ` ];
 
         for (let i = 1; i < rowspan; i++) {
 
-            let next = (addressAsInt + i).toHex();
+            // let next = (address + i).toHex();
+            // let next = address;
 
             rows.push(`
                 <tr>
-                    <td>${next}</td>
+                    <td>${nextConvertedAddress}</td>
                 </tr>
             `);
         }
