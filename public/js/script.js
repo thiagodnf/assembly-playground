@@ -95,4 +95,14 @@ $(function () {
         cpu.updateAll();
     }).val(Settings.getInstructionLength());
 
+    $("#memory-address-as").on("change", function () {
+        Settings.saveMemoryAddressAs($(this).find("option:selected").val());
+        cpu.updateAll();
+    }).val(Settings.getMemoryAddressAs());
+
+    $("#memory-value-as").on("change", function () {
+        Settings.saveMemoryValueAs($(this).find("option:selected").val());
+        cpu.updateAll();
+    }).val(Settings.getMemoryValueAs());
+
 });

@@ -60,10 +60,18 @@ class RamMemory {
 
             let step = 1;
 
-            const value = this.memory[address];
+            let value = this.memory[address];
 
             if (InstructionUtils.isInstruction(value)) {
                 step = Settings.getInstructionLength();
+            } else {
+                if (Settings.getMemoryValueAs() === "decimal") {
+                    value = value;
+                } else if (Settings.getMemoryValueAs() === "binary") {
+                    value = ConvertUtils.toBinary(value);
+                } else if (Settings.getMemoryValueAs() === "hex") {
+                    value = ConvertUtils.toHex(value);
+                }
             }
 
             TableUtils.appendMemoryRow(this.$el, address, value, step);
