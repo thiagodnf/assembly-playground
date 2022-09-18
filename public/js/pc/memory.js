@@ -28,18 +28,16 @@ class RamMemory {
         return value;
     }
 
-    validateAddress(address) {
-        if (!ConvertUtils.isHex(address)) {
-            throw new Error(`Address ${address} is not hexadecimal`);
-        }
-    }
-
     getValue(address) {
 
         return this.memory[address];
     }
 
     setValue(address, value) {
+
+        address = ConvertUtils.toInt(address);
+
+        console.log(address);
 
         this.memory[address] = value.toString();
 

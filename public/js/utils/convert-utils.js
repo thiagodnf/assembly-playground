@@ -14,6 +14,8 @@ class ConvertUtils {
 
     static toInt(value) {
 
+        console.log(value);
+
         if (ConvertUtils.isBinary(value)) {
 
             value = value.replace(/0[bB]/g, "");
@@ -26,7 +28,11 @@ class ConvertUtils {
             }
 
             return parseInt(value, 2);
+        }else if (ConvertUtils.isHex(value)){
+            return parseInt(value, 16);
         }
+
+        return parseInt(value);
     }
 
     static flip(str) {
