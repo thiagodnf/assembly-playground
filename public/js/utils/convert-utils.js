@@ -1,30 +1,64 @@
 class ConvertUtils {
 
-    static isHex(value) {
-        return /^0[xX][0-9a-fA-F]+$/.test(value)
+    static isHex(valueAsInt) {
+        return /^0[xX][0-9a-fA-F]+$/.test(valueAsInt)
     }
 
-    static isBinary(value) {
-        return /^0[bB][0-9a-fA-F]+$/.test(value)
+    static isBinary(valueAsInt) {
+        return /^0[bB][0-9a-fA-F]+$/.test(valueAsInt)
     }
 
-    static toHex(value) {
-        return "0x" + value.toString(16).toUpperCase();
+    static toHex(valueAsInt) {
+        return "0x" + valueAsInt.toString(16).toUpperCase();
     }
 
-    static toBinary(value) {
+    static toInt(value) {
 
-        let output = "";
+        if (ConvertUtils.isBinary(value)) {
 
-        for (let bit = BITS - 1; bit >= 0; bit--) {   // print each bit
-            let mask = (1 << bit);                   // only this bit is set
-            let biti = mask & value;                      // extract this bit from i
-            if (biti != 0)
-                output += "1";
-            else
-                output += "0";
+            value = value.replace(/0[bB]/g, "");
+
+            if (value.startsWith("1")) {
+
+                const flipped = ConvertUtils.flip(value);
+
+                return -1 * (Number("0b" + flipped) + 1);
+            }
+
+            return parseInt(value, 2);
+        }
+    }
+
+    static flip(str) {
+        return str.split('').map(b => (1 - b).toString()).join('');
+    }
+
+    /**
+     * To Binary by using Two's complement
+     * @param {*} value
+     * @param {*} bitCount
+     * @returns
+     */
+    static toBinary(value, bitCount = 4) {
+
+        let binaryStr;
+
+        if (value >= 0) {
+            let twosComp = value.toString(2);
+            binaryStr = ConvertUtils.padAndChop(twosComp, '0', (bitCount || twosComp.length));
+        } else {
+
+            binaryStr = (Math.pow(2, bitCount) + value).toString(2);
+
+            if (Number(binaryStr) < 0) {
+                return undefined
+            }
         }
 
-        return "0b" + output;
+        return `0b${binaryStr}`;
+    }
+
+    static padAndChop(str, padChar, length) {
+        return (Array(length).fill(padChar).join('') + str).slice(length * -1);
     }
 }

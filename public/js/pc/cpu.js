@@ -21,6 +21,7 @@ class CPU {
         }
 
         this.romMemory.reset();
+        this.ramMemory.reset();
 
         this.update();
     }

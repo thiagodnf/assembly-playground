@@ -7,8 +7,6 @@ let codeEditor;
 let BITS = 4;
 let REGISTORS = 5;
 
-
-
 Number.prototype.toHex = function (f) {
     return ConvertUtils.toHex(this);
 }
@@ -20,10 +18,9 @@ String.prototype.toHex = function (f) {
 function loadExample() {
 
     let text = `
-    MOV #10, R0
-    MOV R0, R1
-    MOV R1, [0x0]
-    MOV [0x0] R2
+    MOV #0b0001, [0x0]
+    MOV #0b0001, [0x1]
+    MOV #0x2, [0x2]
     `;
 
     codeEditor.setValue(text.replaceAll("    ", ""));
@@ -108,4 +105,8 @@ $(function () {
         cpu.updateAll();
     }).val(Settings.getMemoryValueAs());
 
+    // console.log(Number(-15).toString(16))
+
+
 });
+

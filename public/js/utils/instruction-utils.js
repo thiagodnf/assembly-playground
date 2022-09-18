@@ -51,7 +51,7 @@ class InstructionUtils {
     static getValue(cpu, operand) {
 
         if (InstructionUtils.isImmediate(operand)) {
-            return parseInt(operand.replace("#", ""));
+            return InstructionUtils.getImmediate(operand);
         } else if (InstructionUtils.isMemory(operand)) {
             const pos = parseInt(operand.replace("\[", "").replace("\]", ""));
             return cpu.ramMemory.getValue(pos);
@@ -60,5 +60,18 @@ class InstructionUtils {
         }
 
         throw new Error(`The operand '${operand}' is not valid`);
+    }
+
+    static getImmediate(value) {
+
+        value = value.replace("#", "");
+
+        if (value.startsWith("0b") || value.startsWith("0B")) {
+            return parseInt(value.replace(/0[b|B]/g, ""), 2);
+        } else if (value.startsWith("0x") || value.startsWith("0X")) {
+            return parseInt(value.replace(/0[x|X]/g, ""), 16);
+        }
+
+        return parseInt(value);
     }
 }
