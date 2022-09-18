@@ -33,7 +33,10 @@ function loadCode(code) {
 
     cpu.reset();
 
-    let lines = code.split("\n").map(e => e.trim()).filter(el => el.length !== 0);
+    let lines = code.split("\n")
+                    .map(e => e.trim())
+                    .map(e => e.replace(/\;(.*)/g,''))
+                    .filter(el => el.length !== 0);
 
     let address = 0;
 
