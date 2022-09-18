@@ -33,6 +33,6 @@ class MOV {
             cpu.ramMemory.setValue(pos, srcValue);
         }
 
-        return cpu.getPC() + 2;
+        return cpu.getPC() + Settings.getInstructionLength();
     }
 }

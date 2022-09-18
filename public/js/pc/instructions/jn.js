@@ -14,6 +14,6 @@ class JN {
             return targetValue;
         }
 
-        return cpu.getPC() + 2;
+        return cpu.getPC() + Settings.getInstructionLength();
     }
 }

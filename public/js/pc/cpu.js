@@ -100,4 +100,10 @@ class CPU {
             TableUtils.appendRowCpu(this.$el, key, this.registors[key]);
         }
     }
+
+    updateAll(){
+        this.update();
+        this.romMemory.update();
+        this.ramMemory.update();
+    }
 }

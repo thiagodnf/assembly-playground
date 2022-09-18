@@ -63,7 +63,7 @@ class RamMemory {
             const value = this.memory[address];
 
             if (InstructionUtils.isInstruction(value)) {
-                step = 2;
+                step = Settings.getInstructionLength();
             }
 
             TableUtils.appendMemoryRow(this.$el, address, value, step);

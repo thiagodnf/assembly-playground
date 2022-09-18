@@ -30,6 +30,6 @@ class CMP {
 
         cpu.setSR(diff < 0 ? 1 : 0, diff == 0 ? 1 : 0);
 
-        return cpu.getPC() + 2;
+        return cpu.getPC() + Settings.getInstructionLength();
     }
 }

@@ -39,7 +39,7 @@ function loadCode(code) {
 
     lines.forEach((line) => {
         cpu.romMemory.setValue(address, line);
-        address += 2;
+        address += Settings.getInstructionLength();
     });
 }
 
@@ -56,7 +56,7 @@ function resizeWindow() {
     $(".panel-source-code").height($(".panel-left").height() * 0.75);
     $(".panel-cpu").height($(".panel-left").height() * 0.75);
 
-    $(".panel-output").height($(".panel-left").height() * 0.25 -20);
+    $(".panel-output").height($(".panel-left").height() * 0.25 - 20);
 }
 
 $(function () {
@@ -75,18 +75,24 @@ $(function () {
         loadCode(codeEditor.getValue());
     })
 
-    $("#step").click(() => {cpu.step()});
+    $("#step").click(() => { cpu.step() });
 
     $(window).resize(resizeWindow).trigger('resize');
 
-    window.onerror = function(message, url, lineNumber) {
+    window.onerror = function (message, url, lineNumber) {
         OutputUtils.error(message);
         return true;
     };
 
-    window.console.log = function(key){
+    window.console.log = function (key) {
         OutputUtils.msg(key);
     }
 
     OutputUtils.msg("Welcome!");
+
+    $("#instruction-length").on("change", function () {
+        Settings.saveInstructionLength($(this).find("option:selected").val());
+        cpu.updateAll();
+    }).val(Settings.getInstructionLength());
+
 });

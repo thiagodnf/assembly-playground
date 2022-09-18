@@ -125,7 +125,15 @@
                     <h5 class="modal-title"><i class="bi me-2 bi-gear"></i>Settings</h5>
                 </div>
                 <div class="modal-body">
-                    hello
+                    <form>
+                        <div class="mb-3">
+                            <label for="instruction-length" class="form-label">Instruction Length</label>
+                            <select class="form-select" id="instruction-length">
+                                <option value="1" selected>1 Byte</option>
+                                <option value="2">2 Bytes</option>
+                            </select>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
@@ -145,6 +153,7 @@
     <script type="text/javascript" src="public/js/utils/instruction-utils.js"></script>
     <script type="text/javascript" src="public/js/utils/convert-utils.js"></script>
     <script type="text/javascript" src="public/js/utils/output-utils.js"></script>
+    <script type="text/javascript" src="public/js/utils/settings-utils.js"></script>
 
     <script type="text/javascript" src="public/js/pc/instructions/mov.js"></script>
     <script type="text/javascript" src="public/js/pc/instructions/add.js"></script>
