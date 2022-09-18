@@ -48,17 +48,17 @@ class InstructionUtils {
         return str.startsWith("[") && str.endsWith("]");
     }
 
-    static getValue(cpu, operand){
+    static getValue(cpu, operand) {
 
         if (InstructionUtils.isImmediate(operand)) {
-            return parseInt(src.replace("#", ""));
+            return parseInt(operand.replace("#", ""));
         } else if (InstructionUtils.isMemory(operand)) {
-            const pos = parseInt(src.replace("\[", "").replace("\]", ""));
+            const pos = parseInt(operand.replace("\[", "").replace("\]", ""));
             return cpu.ramMemory.getValue(pos);
         } else if (InstructionUtils.isRegister(operand)) {
-            return cpu.getRegistor(src);
+            return cpu.getRegistor(operand);
         }
 
-        throw new Error("The value is wrong");
+        throw new Error(`The operand '${operand}' is not valid`);
     }
 }

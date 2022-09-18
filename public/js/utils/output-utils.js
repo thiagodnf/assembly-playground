@@ -2,7 +2,6 @@ class OutputUtils{
 
     static msg(txt){
         $("#output").append(`<p class='my-0'>${txt}</p>`);
-
         OutputUtils.scroll();
     }
 

@@ -21,10 +21,10 @@ String.prototype.toHex = function (f) {
 function loadExample() {
 
     let text = `
-        MOV #10, R0
-        MOV #20, R1
-        SUB #20, R1
-        JMP 0
+    MOV #10, R0
+    MOV R0, R1
+    MOV R1, [0x0]
+    MOV [0x0] R2
     `;
 
     codeEditor.setValue(text.replaceAll("    ", ""));
@@ -72,7 +72,7 @@ $(function () {
 
     loadExample();
 
-    $("#load").click((event) => {
+    $("#load").click(() => {
         loadCode(codeEditor.getValue());
     })
 
@@ -82,9 +82,12 @@ $(function () {
 
     window.onerror = function(message, url, lineNumber) {
         OutputUtils.error(message);
-        //save error and send to server for example.
         return true;
     };
+
+    window.console.log = function(key){
+        OutputUtils.msg(key);
+    }
 
     OutputUtils.msg("Welcome!");
 });

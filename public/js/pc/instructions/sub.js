@@ -16,11 +16,11 @@ class SUB {
     static execute(cpu, src, dst) {
 
         if (!InstructionUtils.isImmediate(src) && !InstructionUtils.isRegister(src)) {
-            throw new Error("Source would be immediate or register");
+            throw new Error("SUB: source would be immediate or register");
         }
 
         if (!InstructionUtils.isRegister(dst)) {
-            throw new Error("Destination would be register");
+            throw new Error("SUB: Destination would be register");
         }
 
         const srcValue = InstructionUtils.getValue(cpu, src);
