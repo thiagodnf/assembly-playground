@@ -32,5 +32,7 @@ class MOV {
             const pos = parseInt(dst.replace("\[", "").replace("\]", ""));
             cpu.ramMemory.setValue(pos, srcValue);
         }
+
+        return cpu.getPC() + 2;
     }
 }

@@ -6,7 +6,6 @@ let codeEditor;
 
 let BITS = 4;
 let REGISTORS = 5;
-let MEMORY_SIZE = 16;
 
 
 

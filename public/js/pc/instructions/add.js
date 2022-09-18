@@ -24,5 +24,7 @@ class ADD {
         const dstValue = InstructionUtils.getValue(cpu, dst);
 
         cpu.setRegistor(dst, dstValue + srcValue);
+
+        return cpu.getPC() + 2;
     }
 }

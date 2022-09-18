@@ -13,5 +13,7 @@ class JN {
         if (sr.n == 1) {
             return targetValue;
         }
+
+        return cpu.getPC() + 2;
     }
 }

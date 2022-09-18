@@ -53,27 +53,6 @@ class CPU {
         return this.getRegistor("PC");
     }
 
-    execute(instruction) {
-
-        let step = 2;
-
-        if (instruction[0] === "MOV") {
-            MOV.execute(this, instruction[1], instruction[2]);
-        } else if (instruction[0] === "ADD") {
-            ADD.execute(this, instruction[1], instruction[2]);
-        } else if (instruction[0] === "SUB") {
-            SUB.execute(this, instruction[1], instruction[2]);
-        } else if (instruction[0] === "CMP") {
-            CMP.execute(this, instruction[1], instruction[2]);
-        } else if (instruction[0] === "JN") {
-            JN.execute(this, instruction[1]);
-        } else {
-            throw new Error("Command not found");
-        }
-
-        return step;
-    }
-
     step() {
 
         let pc = this.getPC();
@@ -86,27 +65,17 @@ class CPU {
         if (InstructionUtils.isInstruction(instruction[0])) {
 
             if (instruction[0] === "MOV") {
-                MOV.execute(this, instruction[1], instruction[2]);
-                nextPC = pc + 2;
+                nextPC = MOV.execute(this, instruction[1], instruction[2]);
             } else if (instruction[0] === "ADD") {
-                ADD.execute(this, instruction[1], instruction[2]);
-                nextPC = pc + 2;
+                nextPC = ADD.execute(this, instruction[1], instruction[2]);
             } else if (instruction[0] === "SUB") {
-                SUB.execute(this, instruction[1], instruction[2]);
-                nextPC = pc + 2;
+                nextPC = SUB.execute(this, instruction[1], instruction[2]);
             } else if (instruction[0] === "CMP") {
-                CMP.execute(this, instruction[1], instruction[2]);
-                nextPC = pc + 2;
+                nextPC = CMP.execute(this, instruction[1], instruction[2]);
             } else if (instruction[0] === "JN") {
                 nextPC = JN.execute(this, instruction[1]);
-                if (!nextPC) {
-                    nextPC = pc + 2;
-                }
             } else if (instruction[0] === "JZ") {
                 nextPC = JZ.execute(this, instruction[1]);
-                if (!nextPC) {
-                    nextPC = pc + 2;
-                }
             } else if (instruction[0] === "JMP") {
                 nextPC = JMP.execute(this, instruction[1]);
             } else {
@@ -116,7 +85,7 @@ class CPU {
 
         this.setPC(nextPC);
 
-        if (this.getPC() > (MEMORY_SIZE - 1)) {
+        if (this.getPC() > (this.ramMemory.memorySize - 1)) {
             this.setPC(0);
         }
 

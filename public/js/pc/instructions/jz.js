@@ -13,5 +13,7 @@ class JZ {
         if (sr.z == 1) {
             return targetValue;
         }
+
+        return cpu.getPC() + 2;
     }
 }
