@@ -1,7 +1,11 @@
 class JMP {
 
-    static execute(cpu, target) {
+    static execute(cpu, dst) {
 
-        return parseInt(target);
+        if (!InstructionUtils.isMemory(dst)) {
+            throw new Error("JMP: source would be memory");
+        }
+
+        return parseInt(dst);
     }
 }

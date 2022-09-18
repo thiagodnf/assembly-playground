@@ -1,8 +1,12 @@
 class JN {
 
-    static execute(cpu, target) {
+    static execute(cpu, dst) {
 
-        const targetValue = parseInt(target);
+        if (!InstructionUtils.isMemory(dst)) {
+            throw new Error("JN: source would be memory");
+        }
+
+        const targetValue = parseInt(dst);
 
         const sr = cpu.getSR();
 

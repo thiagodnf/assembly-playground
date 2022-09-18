@@ -6,18 +6,18 @@
  *
  * Summary: regDst = regDst + regSrc
  *
- * Example: ADD R1, R2 performs this operation: R2 = R1 + R2
+ * Example: ADD R1, R2 performs this operation: R2 = R2 + R1
  */
 class ADD {
 
     static execute(cpu, src, dst) {
 
         if (!InstructionUtils.isImmediate(src) && !InstructionUtils.isRegister(src)) {
-            throw new Error("SUB: source would be immediate or register");
+            throw new Error("ADD: source would be immediate or register");
         }
 
         if (!InstructionUtils.isRegister(dst)) {
-            throw new Error("SUB: Destination would be register");
+            throw new Error("ADD: Destination would be register");
         }
 
         const srcValue = InstructionUtils.getValue(cpu, src);

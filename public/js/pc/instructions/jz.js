@@ -1,8 +1,12 @@
 class JZ {
 
-    static execute(cpu, target) {
+    static execute(cpu, dst) {
 
-        const targetValue = parseInt(target);
+        if (!InstructionUtils.isMemory(dst)) {
+            throw new Error("JZ: source would be memory");
+        }
+
+        const targetValue = parseInt(dst);
 
         const sr = cpu.getSR();
 
