@@ -31,7 +31,7 @@ function loadExample() {
 
 function loadCode(code) {
 
-    cpu.romMemory.reset();
+    cpu.reset();
 
     let lines = code.split("\n").map(e => e.trim()).filter(el => el.length !== 0);
 

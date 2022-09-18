@@ -20,6 +20,8 @@ class CPU {
             this.setRegistor("R" + i, "0");
         }
 
+        this.romMemory.reset();
+
         this.update();
     }
 
