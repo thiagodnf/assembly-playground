@@ -66,12 +66,6 @@ class InstructionUtils {
 
         value = value.replace("#", "");
 
-        if (value.startsWith("0b") || value.startsWith("0B")) {
-            return parseInt(value.replace(/0[b|B]/g, ""), 2);
-        } else if (value.startsWith("0x") || value.startsWith("0X")) {
-            return parseInt(value.replace(/0[x|X]/g, ""), 16);
-        }
-
-        return parseInt(value);
+        return ConvertUtils.toBinary(value);
     }
 }

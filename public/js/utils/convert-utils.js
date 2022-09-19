@@ -1,12 +1,13 @@
 class ConvertUtils {
 
-    static isHex(valueAsInt) {
-        return /^0[xX][0-9a-fA-F]+$/.test(valueAsInt)
-    }
+    // static isHex(valueAsInt) {
+    //     return /^0[xX][0-9a-fA-F]+$/.test(valueAsInt)
+    // }
 
-    static isBinary(valueAsInt) {
-        return /^0[bB][0-9a-fA-F]+$/.test(valueAsInt)
-    }
+    // static isBinary(valueAsInt) {
+
+    //     return /^0[bB][0-9a-fA-F]+$/.test(valueAsInt)
+    // }
 
     static toHex(valueAsInt) {
         return "0x" + valueAsInt.toString(16).toUpperCase();
@@ -39,11 +40,26 @@ class ConvertUtils {
 
     /**
      * To Binary by using Two's complement
-     * @param {*} value
+     * @param {*} valueAsStr
      * @param {*} bitCount
      * @returns
      */
-    static toBinary(value, bitCount = 4) {
+    static toBinary(valueAsStr, bitCount = Settings.getWordSize()) {
+
+        if (IsUtils.isBin(valueAsStr)) {
+
+            if (valueAsStr.length - 2 !== bitCount) {
+                return this.toBinary(ConvertUtils.toInt(valueAsStr), bitCount);
+            }
+
+            return valueAsStr;
+        }
+
+        if (IsUtils.isHex(valueAsStr)) {
+            throw new Error(`Cannot convert ${valueAsStr} to binary because it is hexadecimal`);
+        }
+
+        let value = parseInt(valueAsStr);
 
         let binaryStr;
 

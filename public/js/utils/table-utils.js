@@ -57,9 +57,6 @@ class TableUtils {
 
         for (let i = 1; i < rowspan; i++) {
 
-            // let next = (address + i).toHex();
-            // let next = address;
-
             rows.push(`
                 <tr>
                     <td>${nextConvertedAddress}</td>

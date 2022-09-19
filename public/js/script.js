@@ -7,13 +7,13 @@ let codeEditor;
 let BITS = 4;
 let REGISTORS = 5;
 
-Number.prototype.toHex = function (f) {
-    return ConvertUtils.toHex(this);
-}
+// Number.prototype.toHex = function (f) {
+//     return ConvertUtils.toHex(this);
+// }
 
-String.prototype.toHex = function (f) {
-    return ConvertUtils.toHex(parseInt(this));
-}
+// String.prototype.toHex = function (f) {
+//     return ConvertUtils.toHex(parseInt(this));
+// }
 
 function loadExample() {
 
@@ -31,9 +31,9 @@ function loadCode(code) {
     cpu.reset();
 
     let lines = code.split("\n")
-                    .map(e => e.trim())
-                    .map(e => e.replace(/\;(.*)/g,''))
-                    .filter(el => el.length !== 0);
+        .map(e => e.trim())
+        .map(e => e.replace(/\;(.*)/g, ''))
+        .filter(el => el.length !== 0);
 
     let address = 0;
 
@@ -61,8 +61,8 @@ function resizeWindow() {
 
 $(function () {
 
-    romMemory = new RamMemory($("#rom-memory"), 32);
-    ramMemory = new RamMemory($("#ram-memory"), 32);
+    romMemory = new RamMemory($("#rom-memory"), Math.pow(2, 8 * Settings.getRamMemorySize()));
+    ramMemory = new RamMemory($("#ram-memory"), Math.pow(2, 8 * Settings.getRomMemorySize()));
     cpu = new CPU($("#cpu"), romMemory, ramMemory, 5);
 
     codeEditor = ace.edit("codeEditor");
@@ -95,20 +95,29 @@ $(function () {
         cpu.updateAll();
     }).val(Settings.getInstructionLength());
 
-    $('input[type=radio][name="memory-show-value-as"]').on('change', function() {
+    $("#word-size").on("change", function () {
+        Settings.setWordSize($(this).find("option:selected").val());
+        cpu.updateAll();
+    }).val(Settings.getWordSize());
+
+    $("#ram-memory-size").on("change", function () {
+        Settings.setRamMemorySize($(this).find("option:selected").val());
+        cpu.updateAll();
+    }).val(Settings.getRamMemorySize());
+
+    $("#rom-memory-size").on("change", function () {
+        Settings.setRomMemorySize($(this).find("option:selected").val());
+        cpu.updateAll();
+    }).val(Settings.getRomMemorySize());
+
+    $('input[type=radio][name="memory-show-value-as"]').on('change', function () {
         Settings.setShowMemoryValueAs($(this).val());
         cpu.updateAll();
     }).filter(`[value="${Settings.getShowMemoryValueAs()}"]`).attr('checked', true);
 
-    $('input[type=radio][name="memory-show-address-as"]').on('change', function() {
+    $('input[type=radio][name="memory-show-address-as"]').on('change', function () {
         Settings.setShowMemoryAddressAs($(this).val());
         cpu.updateAll();
     }).filter(`[value="${Settings.getShowMemoryAddressAs()}"]`).attr('checked', true);
 
-
-    //   $('input[type=radio][name="memory-show-value-as"]').filter('[value="dec"]').attr('checked', true)
-
-    cpu.ramMemory.setValue("0x7", -3);
-
 });
-
