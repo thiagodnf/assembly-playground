@@ -13,19 +13,10 @@ class RamMemory {
     reset() {
 
         for (let i = 0; i < this.memorySize; i++) {
-            this.memory[i] = "0";
+            this.memory[i] = ConvertUtils.toBinary(0);
         }
 
         this.update();
-    }
-
-    convert(value) {
-
-        if (this.isBinary) {
-            return ConvertUtils.toBinary(value);
-        }
-
-        return value;
     }
 
     getValue(address) {
@@ -35,14 +26,21 @@ class RamMemory {
 
     setValue(address, value) {
 
-        address = ConvertUtils.toInt(address);
+        if (IsUtils.isHex(address)) {
+            address = ConvertUtils.toInt(address);
+        }
 
-        console.log(address);
+        this.memory[address] = ConvertUtils.toBinary(value);
 
-        this.memory[address] = value.toString();
+        if (IsUtils.isInstruction(value)) {
 
-        if (InstructionUtils.isInstruction(value)) {
-            this.memory[address + 1] = "0";
+            this.memory[address] = value;
+
+            for (let i = 1; i < Settings.getInstructionLength(); i++) {
+                this.memory[address + i] = ConvertUtils.toBinary(0);
+            }
+        } else {
+            this.memory[address] = ConvertUtils.toBinary(value);
         }
 
         this.update();
@@ -60,16 +58,10 @@ class RamMemory {
 
             let value = this.memory[address];
 
-            if (InstructionUtils.isInstruction(value)) {
+            if (IsUtils.isInstruction(value)) {
                 step = Settings.getInstructionLength();
             } else {
-                if (Settings.getMemoryValueAs() === "decimal") {
-                    value = value;
-                } else if (Settings.getMemoryValueAs() === "binary") {
-                    value = ConvertUtils.toBinary(value);
-                } else if (Settings.getMemoryValueAs() === "hex") {
-                    value = ConvertUtils.toHex(value);
-                }
+                value = ConvertUtils.toUI(value, Settings.getShowMemoryValueAs());
             }
 
             TableUtils.appendMemoryRow(this.$el, address, value, step);

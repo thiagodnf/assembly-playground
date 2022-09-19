@@ -41,11 +41,11 @@ class InstructionUtils {
     }
 
     static isImmediate(str) {
-        return str.startsWith("#");
+        return /\#\d+\]/.test(str);
     }
 
     static isMemory(str) {
-        return str.startsWith("[") && str.endsWith("]");
+        return /\[0x[\dabcdef]+\]/.test(str) || /\[\d+\]/.test(str);
     }
 
     static getValue(cpu, operand) {

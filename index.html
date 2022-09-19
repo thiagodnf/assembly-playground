@@ -125,30 +125,48 @@
                     <h5 class="modal-title"><i class="bi me-2 bi-gear"></i>Settings</h5>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <label for="instruction-length" class="form-label">Instruction Length</label>
-                            <select class="form-select" id="instruction-length">
-                                <option value="1" selected>1 Byte</option>
-                                <option value="2">2 Bytes</option>
-                            </select>
+
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#nav-general" type="button" role="tab">General</button>
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-memory" type="button" role="tab">Memory</button>
                         </div>
-                        <div class="mb-3">
-                            <label for="memory-address-as" class="form-label">Memory Address as</label>
-                            <select class="form-select" id="memory-address-as">
-                                <option value="decimal">Decimal</option>
-                                <option value="hex" selected>Hex</option>
-                            </select>
+                    </nav>
+                    <div class="tab-content pt-3">
+                        <div class="tab-pane fade show active" id="nav-general" role="tabpanel">
+                            <div class="mb-3">
+                                <label for="instruction-length" class="form-label">Instruction Length</label>
+                                <select class="form-select" id="instruction-length">
+                                    <option value="1" selected>1 Byte</option>
+                                    <option value="2">2 Bytes</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="memory-value-as" class="form-label">Memory Value as</label>
-                            <select class="form-select" id="memory-value-as">
-                                <option value="decimal" selected>Decimal</option>
-                                <option value="binary">Binary</option>
-                                <option value="hex">Hex</option>
-                            </select>
+                        <div class="tab-pane fade" id="nav-memory" role="tabpanel">
+                            <div class="mb-3">
+                                <label class="form-label d-block">Show address as:</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="memory-show-address-as" id="memory-address-dec" value="dec">
+                                    <label class="form-check-label" for="memory-address-dec">Decimal</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="memory-show-address-as" id="memory-address-hex" value="hex">
+                                    <label class="form-check-label" for="memory-address-hex">Hexadecimal</label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label d-block">Show value as:</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="memory-show-value-as" id="memory-value-dec" value="dec">
+                                    <label class="form-check-label" for="memory-value-dec">Decimal</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="memory-show-value-as" id="memory-value-bin" value="bin">
+                                    <label class="form-check-label" for="memory-value-bin">Binary</label>
+                                </div>
+                            </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
@@ -169,6 +187,7 @@
     <script type="text/javascript" src="public/js/utils/convert-utils.js"></script>
     <script type="text/javascript" src="public/js/utils/output-utils.js"></script>
     <script type="text/javascript" src="public/js/utils/settings-utils.js"></script>
+    <script type="text/javascript" src="public/js/utils/is-utils.js"></script>
 
     <script type="text/javascript" src="public/js/pc/instructions/mov.js"></script>
     <script type="text/javascript" src="public/js/pc/instructions/add.js"></script>

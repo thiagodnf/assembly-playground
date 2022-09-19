@@ -12,27 +12,25 @@ class ConvertUtils {
         return "0x" + valueAsInt.toString(16).toUpperCase();
     }
 
-    static toInt(value) {
+    static toInt(str) {
 
-        console.log(value);
+        if (IsUtils.isBin(str)) {
 
-        if (ConvertUtils.isBinary(value)) {
+            str = str.replace(/0[bB]/g, "");
 
-            value = value.replace(/0[bB]/g, "");
+            if (str.startsWith("1")) {
 
-            if (value.startsWith("1")) {
-
-                const flipped = ConvertUtils.flip(value);
+                const flipped = ConvertUtils.flip(str);
 
                 return -1 * (Number("0b" + flipped) + 1);
             }
 
-            return parseInt(value, 2);
-        }else if (ConvertUtils.isHex(value)){
-            return parseInt(value, 16);
+            return parseInt(str, 2);
+        } else if (IsUtils.isHex(str)) {
+            return parseInt(str, 16);
         }
 
-        return parseInt(value);
+        return parseInt(str);
     }
 
     static flip(str) {
@@ -66,5 +64,24 @@ class ConvertUtils {
 
     static padAndChop(str, padChar, length) {
         return (Array(length).fill(padChar).join('') + str).slice(length * -1);
+    }
+
+    static toUI(str, target = "dec") {
+
+        // str = str.replace(/0[bB]/g, "");
+
+        const numberAsInt = ConvertUtils.toInt(str);
+
+        // console.debug(parseInt(numberAsInt, 16));
+
+        if (target === "dec") {
+            return numberAsInt;
+        } else if (target === "bin") {
+            return ConvertUtils.toBinary(str);
+        } else if (target === "hex") {
+            return ConvertUtils.toHex(str);
+        }
+
+        throw new Error(`Number system ${target} not recognized. Try "dec", "bin", "hex"`)
     }
 }

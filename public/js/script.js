@@ -95,18 +95,20 @@ $(function () {
         cpu.updateAll();
     }).val(Settings.getInstructionLength());
 
-    $("#memory-address-as").on("change", function () {
-        Settings.saveMemoryAddressAs($(this).find("option:selected").val());
+    $('input[type=radio][name="memory-show-value-as"]').on('change', function() {
+        Settings.setShowMemoryValueAs($(this).val());
         cpu.updateAll();
-    }).val(Settings.getMemoryAddressAs());
+    }).filter(`[value="${Settings.getShowMemoryValueAs()}"]`).attr('checked', true);
 
-    $("#memory-value-as").on("change", function () {
-        Settings.saveMemoryValueAs($(this).find("option:selected").val());
+    $('input[type=radio][name="memory-show-address-as"]').on('change', function() {
+        Settings.setShowMemoryAddressAs($(this).val());
         cpu.updateAll();
-    }).val(Settings.getMemoryValueAs());
+    }).filter(`[value="${Settings.getShowMemoryAddressAs()}"]`).attr('checked', true);
 
-    // console.log(Number(-15).toString(16))
 
+    //   $('input[type=radio][name="memory-show-value-as"]').filter('[value="dec"]').attr('checked', true)
+
+    cpu.ramMemory.setValue("0x7", -3);
 
 });
 

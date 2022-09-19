@@ -40,10 +40,10 @@ class TableUtils {
         let convertedAddress;
         let nextConvertedAddress;
 
-        if (Settings.getMemoryAddressAs() === "decimal") {
+        if (Settings.getShowMemoryAddressAs() == "dec") {
             convertedAddress = addressAsInt;
             nextConvertedAddress = addressAsInt + 1;
-        } else if (Settings.getMemoryAddressAs() === "hex") {
+        } else if (Settings.getShowMemoryAddressAs() == "hex") {
             convertedAddress = ConvertUtils.toHex(addressAsInt);
             nextConvertedAddress = ConvertUtils.toHex(addressAsInt + 1);
         }
