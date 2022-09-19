@@ -16,19 +16,19 @@ class MOV {
 
     static execute(cpu, src, dst) {
 
-        if (!InstructionUtils.isImmediate(src) && !InstructionUtils.isMemory(src) && !InstructionUtils.isRegister(src)) {
+        if (!IsUtils.isImmediate(src) && !IsUtils.isMemory(src) && !IsUtils.isRegister(src)) {
             throw new Error("MOV: source would be immediate, memory or register");
         }
 
-        if (!InstructionUtils.isMemory(dst) && !InstructionUtils.isRegister(dst)) {
+        if (!IsUtils.isMemory(dst) && !IsUtils.isRegister(dst)) {
             throw new Error("MOV: destination would be memory or register");
         }
 
         const srcValue = InstructionUtils.getValue(cpu, src)
 
-        if (InstructionUtils.isRegister(dst)) {
+        if (IsUtils.isRegister(dst)) {
             cpu.setRegistor(dst, srcValue);
-        } else if (InstructionUtils.isMemory(dst)) {
+        } else if (IsUtils.isMemory(dst)) {
             const pos = parseInt(dst.replace("\[", "").replace("\]", ""));
             cpu.ramMemory.setValue(pos, srcValue);
         }

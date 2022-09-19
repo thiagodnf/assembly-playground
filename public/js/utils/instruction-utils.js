@@ -50,12 +50,12 @@ class InstructionUtils {
 
     static getValue(cpu, operand) {
 
-        if (InstructionUtils.isImmediate(operand)) {
+        if (IsUtils.isImmediate(operand)) {
             return InstructionUtils.getImmediate(operand);
-        } else if (InstructionUtils.isMemory(operand)) {
+        } else if (IsUtils.isMemory(operand)) {
             const pos = parseInt(operand.replace("\[", "").replace("\]", ""));
             return cpu.ramMemory.getValue(pos);
-        } else if (InstructionUtils.isRegister(operand)) {
+        } else if (IsUtils.isRegister(operand)) {
             return cpu.getRegistor(operand);
         }
 
