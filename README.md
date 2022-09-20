@@ -15,9 +15,9 @@ Access the app [here](https://thiagodnf.github.io/assembly-playground).
 
 ## Screenshots
 
-
-![screen](https://user-images.githubusercontent.com/114015/191307151-dd1f835f-5141-4adb-bcd7-bdbdc1367c82.png)
-
+<kbd>
+<img src="https://user-images.githubusercontent.com/114015/191307151-dd1f835f-5141-4adb-bcd7-bdbdc1367c82.png"/>
+</kbd>
 
 ## For Developers
 
