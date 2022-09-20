@@ -1,14 +1,14 @@
 {
-    "name": "ical-to-csv",
+    "name": "assembly-playground",
     "version": "0.0.2",
     "author": "Thiago Ferreira",
     "license": "MIT",
-    "description": "Convert from .ical to .csv files on your browser. No data sent out to external servers",
-    "homepage": "https://thiagodnf.github.io/ical-to-csv",
+    "description": "Play with assembly programming language on your browser and see CPU registers and memory in action",
+    "homepage": "https://thiagodnf.github.io/assembly-playground",
     "private": true,
     "repository": {
         "type": "git",
-        "url": "https://github.com/thiagodnf/ical-to-csv"
+        "url": "https://github.com/thiagodnf/assembly-playground"
     },
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
