@@ -16,31 +16,10 @@ class TableUtils {
 
         table.find('tbody').append(`
             <tr>
-                <td>${id}</td>
-                <td id="${id}">${value}</td>
+                <td class="px-3">${id}</td>
+                <td class="px-3" id="${id}">${value}</td>
             </tr>
         `);
-    }
-
-    static appendRowSpan(table, id, value, rowspan = 1) {
-
-        let rows = [`
-            <tr>
-                <td>${id}</td>
-                <td id="${id}" rowspan="${rowspan}">${value}</td>
-            </tr>
-        ` ];
-
-        for (let i = 1; i < rowspan; i++) {
-            rows.push(`
-                <tr>
-                    <td>${(id + 1)}</td>
-                </tr>
-            `);
-        }
-
-
-        table.find('tbody').append(rows);
     }
 
     static appendMemoryRow(table, addressAsInt, value, rowspan = 1) {
@@ -58,16 +37,16 @@ class TableUtils {
 
         let rows = [`
             <tr>
-                <td>${convertedAddress}</td>
-                <td rowspan="${rowspan}">${value}</td>
+                <td class="px-3">${convertedAddress}</td>
+                <td class="px-3" rowspan="${rowspan}">${value}</td>
             </tr>
         ` ];
 
         for (let i = 1; i < rowspan; i++) {
 
             rows.push(`
-                <tr>
-                    <td>${nextConvertedAddress}</td>
+                <tr class="px-3">
+                    <td class="px-3">${nextConvertedAddress}</td>
                 </tr>
             `);
         }

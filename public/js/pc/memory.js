@@ -59,9 +59,8 @@ class RamMemory {
         TableUtils.removeAllRows(this.$el);
 
         let address = 0;
-        let size = this.getMemorySize();
 
-        while (address <= size - 1) {
+        while (address <= this.getMemorySize() - 1) {
 
             let step = 1;
 
