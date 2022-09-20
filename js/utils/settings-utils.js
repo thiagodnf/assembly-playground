@@ -28,10 +28,6 @@ class Settings {
         return parseInt(Settings.get(Settings.INSTRUCTION_LENGTH) || 8);
     }
 
-    static setShowMemoryValueAs(value){
-        Settings.save(Settings.SHOW_MEMORY_VALUE_AS, value);
-    }
-
     static getWordSize() {
         return parseInt(Settings.get(Settings.WORD_SIZE) || 4);
     }
@@ -49,11 +45,15 @@ class Settings {
     }
 
     static getRomMemorySize() {
-        return parseFloat(Settings.get(Settings.ROM_MEMORY_SIZE) || 1);
+        return parseFloat(Settings.get(Settings.ROM_MEMORY_SIZE) || 4);
     }
 
     static setRomMemorySize(value){
         Settings.save(Settings.ROM_MEMORY_SIZE, value);
+    }
+
+    static setShowMemoryValueAs(value){
+        Settings.save(Settings.SHOW_MEMORY_VALUE_AS, value);
     }
 
     static getShowMemoryValueAs(){

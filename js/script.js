@@ -1,16 +1,5 @@
 let cpu;
-
 let codeEditor;
-
-let BITS = 4;
-
-// Number.prototype.toHex = function (f) {
-//     return ConvertUtils.toHex(this);
-// }
-
-// String.prototype.toHex = function (f) {
-//     return ConvertUtils.toHex(parseInt(this));
-// }
 
 function loadExample() {
 

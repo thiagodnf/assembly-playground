@@ -32,6 +32,10 @@ class MOV {
             throw new Error("MOV: destination would be memory or register");
         }
 
+        if (IsUtils.isMemory(src) && IsUtils.isMemory(dst)) {
+            throw new Error("MOV: source and destination cannot be both memory");
+        }
+
         const srcValue = InstructionUtils.getValue(cpu, src)
 
         if (IsUtils.isRegister(dst)) {
