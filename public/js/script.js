@@ -54,7 +54,12 @@ $(function () {
 
     $("#load").click(() => { cpu.loadCode(codeEditor.getValue()); })
 
-    $("#step").click(() => { cpu.step() });
+    $("#step").click(() => {
+        cpu.step()
+
+        $(".panel-rom-memory").find(`td`).removeClass("current-pc");
+        $(".panel-rom-memory").find(`td[data-address=${cpu.getPC()}]`).addClass("current-pc");
+    });
 
     $(window).resize(resizeWindow).trigger('resize');
 

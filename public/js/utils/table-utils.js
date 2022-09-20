@@ -37,7 +37,7 @@ class TableUtils {
 
         let rows = [`
             <tr>
-                <td class="px-3">${convertedAddress}</td>
+                <td class="px-3" data-address="${addressAsInt}">${convertedAddress}</td>
                 <td class="px-3" rowspan="${rowspan}">${value}</td>
             </tr>
         ` ];

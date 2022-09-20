@@ -6,6 +6,10 @@ body {
     font-size: 14px;
 }
 
+.current-pc{
+    background-color: #F9ECC3  !important
+}
+
 .navbar-nav .nav-link{
     color: white !important;
 }
