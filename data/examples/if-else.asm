@@ -1,6 +1,5 @@
 ;  int a = 1
 ;  int b = 5;
-;  int c = 0;
 ;  if(a < b){
 ;    c = 1;
 ;  } else {
@@ -8,12 +7,10 @@
 ;  }
 MOV #1, R2 ; int a = 1
 MOV #5, R3 ; int b = 5
-MOV #0, R2  ; int c = 0
 
 CMP R3, R2
 JN 7
-MOV #-1, R2
+MOV #-1, R6
 JMP 8
-MOV #1, R2
-MOV R2, R6
+MOV #1, R6
 INT 10h
