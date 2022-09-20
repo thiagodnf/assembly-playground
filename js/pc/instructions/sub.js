@@ -26,7 +26,7 @@ class SUB {
         const srcValue = InstructionUtils.getValueAsInt(cpu, src);
         const dstValue = InstructionUtils.getValueAsInt(cpu, dst);
 
-        cpu.setRegistor(dst, dstValue - srcValue);
+        cpu.setRegister(dst, dstValue - srcValue);
 
         return cpu.getPC() + cpu.getInstructionStep();
     }

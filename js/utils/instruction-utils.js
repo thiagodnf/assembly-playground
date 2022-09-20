@@ -1,10 +1,8 @@
 class InstructionUtils {
 
-    static COMMANDS = ["ADD", "SUB", "MOV", "CMP", "JN", "JZ", "JMP"];
-
     static parse(str) {
 
-        if (!this.isInstruction(str)) {
+        if (!IsUtils.isInstruction(str)) {
             return [parseInt(str)];
         }
 
@@ -22,18 +20,6 @@ class InstructionUtils {
         }
 
         return instruction;
-    }
-
-    static isInstruction(value) {
-
-        for (const command of this.COMMANDS) {
-
-            if (value.toString().startsWith(command)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     static isRegister(str) {
@@ -56,7 +42,7 @@ class InstructionUtils {
             const pos = parseInt(operand.replace("\[", "").replace("\]", ""));
             return cpu.ramMemory.getValue(pos);
         } else if (IsUtils.isRegister(operand)) {
-            return cpu.getRegistor(operand);
+            return cpu.getRegister(operand);
         }
 
         throw new Error(`The operand '${operand}' is not valid`);

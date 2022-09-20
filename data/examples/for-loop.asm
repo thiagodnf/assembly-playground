@@ -10,4 +10,5 @@ JZ 7
 ADD #2, R0
 ADD #1, R1
 JMP 2
-MOV R0, [0x0]
+MOV R0, R4
+INT 10h

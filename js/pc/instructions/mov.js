@@ -39,7 +39,7 @@ class MOV {
         const srcValue = InstructionUtils.getValue(cpu, src)
 
         if (IsUtils.isRegister(dst)) {
-            cpu.setRegistor(dst, srcValue);
+            cpu.setRegister(dst, srcValue);
         } else if (IsUtils.isMemory(dst)) {
             const pos = parseInt(dst.replace("\[", "").replace("\]", ""));
             cpu.ramMemory.setValue(pos, srcValue);

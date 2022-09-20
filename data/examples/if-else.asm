@@ -15,4 +15,5 @@ JN 7
 MOV #-1, R2
 JMP 8
 MOV #1, R2
-MOV R2, [0x0]
+MOV R2, R4
+INT 10h

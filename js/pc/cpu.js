@@ -17,7 +17,7 @@ class CPU {
         this.setSR(0, 0)
 
         for (let i = 0; i < this.numberOfRegistors; i++) {
-            this.setRegistor("R" + i, ConvertUtils.toBinary(0));
+            this.setRegister("R" + i, ConvertUtils.toBinary(0));
         }
 
         this.romMemory.reset();
@@ -50,12 +50,16 @@ class CPU {
         return step < 1 ? Settings.getInstructionLength() / Settings.getWordSize() : 1;
     }
 
-    setRegistor(registorId, value = 0) {
+    setRegister(registorId, value = 0) {
         this.registors[registorId.toUpperCase()] = ConvertUtils.toBinary(value);
     }
 
-    getRegistor(registorId) {
+    getRegister(registorId) {
         return this.registors[registorId];
+    }
+
+    getLastRegister(){
+        return this.registors["R4"];
     }
 
     setSR(n, z) {
@@ -83,7 +87,7 @@ class CPU {
 
         let instruction = InstructionUtils.parse(value);
 
-        if (InstructionUtils.isInstruction(instruction[0])) {
+        if (IsUtils.isInstruction(instruction[0])) {
 
             if (instruction[0] === "MOV") {
                 nextPC = MOV.execute(this, instruction[1], instruction[2]);
@@ -99,6 +103,8 @@ class CPU {
                 nextPC = JZ.execute(this, instruction[1]);
             } else if (instruction[0] === "JMP") {
                 nextPC = JMP.execute(this, instruction[1]);
+            } else if (instruction[0] === "INT") {
+                nextPC = INT.execute(this, instruction[1]);
             } else {
                 throw new Error(`Command ${instruction[0]} not found`);
             }

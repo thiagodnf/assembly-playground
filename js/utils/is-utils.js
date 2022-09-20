@@ -1,6 +1,6 @@
 class IsUtils {
 
-    static COMMANDS = ["ADD", "SUB", "MOV", "CMP", "JN", "JZ", "JMP"];
+    static COMMANDS = ["ADD", "SUB", "MOV", "CMP", "JN", "JZ", "JMP", "INT"];
 
     static DEC = "-?[0-9]+";
 

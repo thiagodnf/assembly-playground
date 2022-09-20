@@ -23,7 +23,7 @@ class ADD {
         let srcValue = InstructionUtils.getValueAsInt(cpu, src);
         let dstValue = InstructionUtils.getValueAsInt(cpu, dst);
 
-        cpu.setRegistor(dst, dstValue + srcValue);
+        cpu.setRegister(dst, dstValue + srcValue);
 
         return cpu.getPC() + cpu.getInstructionStep();
     }
