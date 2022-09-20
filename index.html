@@ -29,6 +29,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modal-documentation">Documentation</a></li>
                         <li class="nav-item dropdown examples">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" >
                                 Examples
@@ -204,6 +205,31 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-documentation" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-light">
+                    <h5 class="modal-title"><i class="bi me-2 bi-book"></i>Documentation</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Available Commands</p>
+                    <ul>
+                        <li>ADD [imd|reg], reg</li>
+                        <li>SUB [imd|reg], reg</li>
+                        <li>CMP [imd|reg], reg</li>
+                        <li>JMP address</li>
+                        <li>JN address</li>
+                        <li>JZ address</li>
+                        <li>MOV [imd|reg|mem], [reg|mem]</li>
+                    </ul>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
