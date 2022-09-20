@@ -35,7 +35,7 @@ function highlightPC(){
 
 $(function () {
 
-    cpu = new CPU($("#cpu"), 5);
+    cpu = new CPU($("#cpu"), 7);
     cpu.romMemory = new RamMemory($("#rom-memory"), cpu, Settings.getRomMemorySize());
     cpu.ramMemory = new RamMemory($("#ram-memory"), cpu, Settings.getRamMemorySize());
     cpu.reset();

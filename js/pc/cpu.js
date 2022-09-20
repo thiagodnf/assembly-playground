@@ -16,7 +16,7 @@ class CPU {
         this.setPC(0);
         this.setSR(0, 0)
 
-        for (let i = 0; i < this.numberOfRegistors; i++) {
+        for (let i = 2; i < this.numberOfRegistors; i++) {
             this.setRegister("R" + i, ConvertUtils.toBinary(0));
         }
 
@@ -37,7 +37,7 @@ class CPU {
 
         let address = 0;
 
-        for(const line of lines){
+        for (const line of lines) {
             this.romMemory.setValue(address, line);
             address += this.getInstructionStep();
         }
@@ -51,6 +51,11 @@ class CPU {
     }
 
     setRegister(registorId, value = 0) {
+
+        if (!registorId.startsWith("R")) {
+            throw new Error(`${registorId} is invalid. All register starts with 'R'`);
+        }
+
         this.registers[registorId.toUpperCase()] = ConvertUtils.toBinary(value);
     }
 
@@ -58,12 +63,12 @@ class CPU {
         return this.registers[registorId];
     }
 
-    getLastRegister(){
+    getLastRegister() {
         return this.registers["R4"];
     }
 
     setSR(n, z) {
-        this.registers["SR"] = {n, z};
+        this.registers["SR"] = { n, z };
     }
 
     getSR() {
@@ -128,7 +133,7 @@ class CPU {
         }
     }
 
-    updateAll(){
+    updateAll() {
         this.update();
         this.romMemory.update();
         this.ramMemory.update();
