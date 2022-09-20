@@ -39,6 +39,11 @@ function resizeWindow() {
     $(".panel-output").height($(".panel-left").height() * 0.25 - 20);
 }
 
+function highlightPC(){
+    $(".panel-rom-memory").find(`td`).removeClass("current-pc");
+    $(".panel-rom-memory").find(`td[data-address=${cpu.getPC()}]`).addClass("current-pc");
+}
+
 $(function () {
 
     cpu = new CPU($("#cpu"), 5);
@@ -52,13 +57,14 @@ $(function () {
 
     loadExample();
 
-    $("#load").click(() => { cpu.loadCode(codeEditor.getValue()); })
+    $("#load").click(() => {
+        cpu.loadCode(codeEditor.getValue());
+        highlightPC();
+    })
 
     $("#step").click(() => {
         cpu.step()
-
-        $(".panel-rom-memory").find(`td`).removeClass("current-pc");
-        $(".panel-rom-memory").find(`td[data-address=${cpu.getPC()}]`).addClass("current-pc");
+        highlightPC();
     });
 
     $(window).resize(resizeWindow).trigger('resize');
@@ -73,6 +79,8 @@ $(function () {
     }
 
     OutputUtils.msg("Welcome!");
+
+    highlightPC();
 
     $(".examples .dropdown-item").on("click", function () {
 
