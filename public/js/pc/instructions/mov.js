@@ -14,6 +14,14 @@
  */
 class MOV {
 
+    /**
+     * Execute the instruction
+     *
+     * @param {CPU} cpu
+     * @param {string} src
+     * @param {string} dst
+     * @returns the next PC
+     */
     static execute(cpu, src, dst) {
 
         if (!IsUtils.isImmediate(src) && !IsUtils.isMemory(src) && !IsUtils.isRegister(src)) {
@@ -33,6 +41,6 @@ class MOV {
             cpu.ramMemory.setValue(pos, srcValue);
         }
 
-        return cpu.getPC() + Settings.getInstructionLength();
+        return cpu.getPC() + cpu.getInstructionStep()
     }
 }

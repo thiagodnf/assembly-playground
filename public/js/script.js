@@ -1,11 +1,8 @@
 let cpu;
-let romMemory;
-let ramMemory;
 
 let codeEditor;
 
 let BITS = 4;
-let REGISTORS = 5;
 
 // Number.prototype.toHex = function (f) {
 //     return ConvertUtils.toHex(this);
@@ -20,7 +17,7 @@ function loadExample() {
     let text = `
     MOV #0b0001, [0x0]
     MOV #0b0001, [0x1]
-    MOV #0x2, [0x2]
+    JMP 0
     `;
 
     codeEditor.setValue(text.replaceAll("    ", ""));
@@ -44,9 +41,10 @@ function resizeWindow() {
 
 $(function () {
 
-    romMemory = new RamMemory($("#rom-memory"), Settings.getRomMemorySize());
-    ramMemory = new RamMemory($("#ram-memory"), Settings.getRamMemorySize());
-    cpu = new CPU($("#cpu"), romMemory, ramMemory, 5);
+    cpu = new CPU($("#cpu"), 5);
+    cpu.romMemory = new RamMemory($("#rom-memory"), cpu, Settings.getRomMemorySize());
+    cpu.ramMemory = new RamMemory($("#ram-memory"), cpu, Settings.getRamMemorySize());
+    cpu.reset();
 
     codeEditor = ace.edit("codeEditor");
     codeEditor.setTheme("ace/theme/monokai");

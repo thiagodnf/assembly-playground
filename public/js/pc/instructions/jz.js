@@ -2,18 +2,16 @@ class JZ {
 
     static execute(cpu, dst) {
 
-        if (!InstructionUtils.isMemory(dst)) {
-            throw new Error("JZ: source would be memory");
+        if (!IsUtils.isDec(dst) && !IsUtils.isHex(dst)) {
+            throw new Error("JZ: source would be decimal or hexadecimal");
         }
-
-        const targetValue = parseInt(dst);
 
         const sr = cpu.getSR();
 
         if (sr.z == 1) {
-            return targetValue;
+            return ConvertUtils.toInt(dst);
         }
 
-        return cpu.getPC() + Settings.getInstructionLength();
+        return cpu.getPC() + cpu.getInstructionStep();
     }
 }

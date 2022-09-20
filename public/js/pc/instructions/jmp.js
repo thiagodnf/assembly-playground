@@ -2,10 +2,10 @@ class JMP {
 
     static execute(cpu, dst) {
 
-        if (!InstructionUtils.isMemory(dst)) {
-            throw new Error("JMP: source would be memory");
+        if (!IsUtils.isDec(dst) && !IsUtils.isHex(dst)) {
+            throw new Error("JMP: source would be decimal or hexadecimal");
         }
 
-        return parseInt(dst);
+        return ConvertUtils.toInt(dst);
     }
 }

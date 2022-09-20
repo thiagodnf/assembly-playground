@@ -6,6 +6,14 @@ class TableUtils {
 
     static appendRowCpu(table, id, value) {
 
+        if (id === "SR") {
+            value = `N: ${value.n}<span class="mx-3">|</span>Z: ${value.z}`
+        }else if (id === "PC") {
+            value = ConvertUtils.toUI(value, Settings.getShowMemoryAddressAs());
+        }else {
+            value = ConvertUtils.toUI(value, Settings.getShowMemoryValueAs());
+        }
+
         table.find('tbody').append(`
             <tr>
                 <td>${id}</td>

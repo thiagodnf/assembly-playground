@@ -28,6 +28,6 @@ class SUB {
 
         cpu.setRegistor(dst, dstValue - srcValue);
 
-        return cpu.getPC() + Settings.getInstructionLength();
+        return cpu.getPC() + cpu.getInstructionStep();
     }
 }

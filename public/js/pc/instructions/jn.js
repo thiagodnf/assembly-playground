@@ -2,18 +2,16 @@ class JN {
 
     static execute(cpu, dst) {
 
-        if (!InstructionUtils.isMemory(dst)) {
-            throw new Error("JN: source would be memory");
+        if (!IsUtils.isDec(dst) && !IsUtils.isHex(dst)) {
+            throw new Error("JN: source would be decimal or hexadecimal");
         }
-
-        const targetValue = parseInt(dst);
 
         const sr = cpu.getSR();
 
         if (sr.n == 1) {
-            return targetValue;
+            return ConvertUtils.toInt(dst);
         }
 
-        return cpu.getPC() + Settings.getInstructionLength();
+        return cpu.getPC() + cpu.getInstructionStep();
     }
 }

@@ -1,12 +1,10 @@
 class RamMemory {
 
-    constructor($el, memorySize) {
+    constructor($el, cpu, memorySize) {
 
         this.$el = $el;
+        this.cpu = cpu;
         this.memorySize = memorySize;
-        this.isBinary = true;
-        this.instructionLength = 8;
-
         this.memory = {};
 
         this.reset();
@@ -14,20 +12,13 @@ class RamMemory {
 
     reset() {
 
-        let size = Math.pow(2, this.memorySize);
+        this.memory = {};
 
-        for (let i = 0; i < size; i++) {
+        for (let i = 0; i < this.getMemorySize(); i++) {
             this.memory[i] = ConvertUtils.toBinary(0);
         }
 
         this.update();
-    }
-
-    getInstructionStep() {
-
-        const step = Settings.getWordSize() / Settings.getInstructionLength();
-
-        return step < 1 ? Settings.getInstructionLength() / Settings.getWordSize() : 1;
     }
 
     getValue(address) {
@@ -39,6 +30,8 @@ class RamMemory {
 
     setValue(address, value) {
 
+        console.debug("setValue", { address, value });
+
         address = ConvertUtils.toInt(address);
 
         this.memory[address] = ConvertUtils.toBinary(value);
@@ -47,7 +40,7 @@ class RamMemory {
 
             this.memory[address] = value;
 
-            for (let i = 1; i < this.getInstructionStep(); i++) {
+            for (let i = 1; i < this.cpu.getInstructionStep(); i++) {
                 this.memory[address + i] = ConvertUtils.toBinary(0);
             }
         } else {
@@ -57,12 +50,16 @@ class RamMemory {
         this.update();
     }
 
+    getMemorySize() {
+        return Math.pow(2, this.memorySize);
+    }
+
     update() {
 
         TableUtils.removeAllRows(this.$el);
 
         let address = 0;
-        let size = Math.pow(2, this.memorySize);
+        let size = this.getMemorySize();
 
         while (address <= size - 1) {
 
@@ -71,7 +68,7 @@ class RamMemory {
             let value = this.memory[address];
 
             if (IsUtils.isInstruction(value)) {
-                step = this.getInstructionStep();
+                step = this.cpu.getInstructionStep();
             } else {
                 value = ConvertUtils.toUI(value, Settings.getShowMemoryValueAs());
             }

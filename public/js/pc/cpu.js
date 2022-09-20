@@ -1,17 +1,17 @@
 class CPU {
 
-    constructor($el, romMemory, ramMemory, numberOfRegistors) {
+    constructor($el, numberOfRegistors) {
 
         this.$el = $el;
         this.numberOfRegistors = numberOfRegistors;
-        this.romMemory = romMemory;
-        this.ramMemory = ramMemory;
+        this.romMemory = {};
+        this.ramMemory = {};
         this.registors = {};
-
-        this.reset();
     }
 
     reset() {
+
+        this.registors = {};
 
         this.setPC(0);
         this.setSR(0, 0)
@@ -39,8 +39,15 @@ class CPU {
 
         for(const line of lines){
             this.romMemory.setValue(address, line);
-            address += this.romMemory.getInstructionStep();
+            address += this.getInstructionStep();
         }
+    }
+
+    getInstructionStep() {
+
+        const step = Settings.getWordSize() / Settings.getInstructionLength();
+
+        return step < 1 ? Settings.getInstructionLength() / Settings.getWordSize() : 1;
     }
 
     setRegistor(registorId, value = 0) {
@@ -51,22 +58,16 @@ class CPU {
         return this.registors[registorId];
     }
 
-    getSR() {
-
-        const parts = this.getRegistor("SR").split("|").map(e => e.trim());
-
-        return {
-            n: parseInt(parts[0].split(":").map(e => e.trim())[1]),
-            z: parseInt(parts[1].split(":").map(e => e.trim())[1])
-        }
+    setSR(n, z) {
+        this.setRegistor("SR", {n, z});
     }
 
-    setSR(n, z) {
-        this.setRegistor("SR", `N:${n} | Z:${z}`);
+    getSR() {
+        return this.getRegistor("SR");
     }
 
     setPC(value) {
-        this.setRegistor("pc", value);
+        this.setRegistor("PC", value);
     }
 
     getPC() {
@@ -105,7 +106,7 @@ class CPU {
 
         this.setPC(nextPC);
 
-        if (this.getPC() > (this.ramMemory.memorySize - 1)) {
+        if (this.getPC() > (this.romMemory.getMemorySize() - 1)) {
             this.setPC(0);
         }
 
