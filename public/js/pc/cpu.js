@@ -17,13 +17,30 @@ class CPU {
         this.setSR(0, 0)
 
         for (let i = 0; i < this.numberOfRegistors; i++) {
-            this.setRegistor("R" + i, "0");
+            this.setRegistor("R" + i, ConvertUtils.toBinary(0));
         }
 
         this.romMemory.reset();
         this.ramMemory.reset();
 
         this.update();
+    }
+
+    loadCode(codeAsStr) {
+
+        this.reset();
+
+        let lines = codeAsStr.split("\n")
+            .map(e => e.trim())
+            .map(e => e.replace(/\;(.*)/g, ''))
+            .filter(el => el.length !== 0);
+
+        let address = 0;
+
+        for(const line of lines){
+            this.romMemory.setValue(address, line);
+            address += this.romMemory.getInstructionStep();
+        }
     }
 
     setRegistor(registorId, value = 0) {

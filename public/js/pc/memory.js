@@ -4,31 +4,42 @@ class RamMemory {
 
         this.$el = $el;
         this.memorySize = memorySize;
-        this.memory = {};
         this.isBinary = true;
+        this.instructionLength = 8;
+
+        this.memory = {};
 
         this.reset();
     }
 
     reset() {
 
-        for (let i = 0; i < this.memorySize; i++) {
+        let size = Math.pow(2, this.memorySize);
+
+        for (let i = 0; i < size; i++) {
             this.memory[i] = ConvertUtils.toBinary(0);
         }
 
         this.update();
     }
 
+    getInstructionStep() {
+
+        const step = Settings.getWordSize() / Settings.getInstructionLength();
+
+        return step < 1 ? Settings.getInstructionLength() / Settings.getWordSize() : 1;
+    }
+
     getValue(address) {
+
+        address = ConvertUtils.toInt(address);
 
         return this.memory[address];
     }
 
     setValue(address, value) {
 
-        if (IsUtils.isHex(address)) {
-            address = ConvertUtils.toInt(address);
-        }
+        address = ConvertUtils.toInt(address);
 
         this.memory[address] = ConvertUtils.toBinary(value);
 
@@ -36,7 +47,7 @@ class RamMemory {
 
             this.memory[address] = value;
 
-            for (let i = 1; i < Settings.getInstructionLength(); i++) {
+            for (let i = 1; i < this.getInstructionStep(); i++) {
                 this.memory[address + i] = ConvertUtils.toBinary(0);
             }
         } else {
@@ -51,15 +62,16 @@ class RamMemory {
         TableUtils.removeAllRows(this.$el);
 
         let address = 0;
+        let size = Math.pow(2, this.memorySize);
 
-        while (address <= this.memorySize - 1) {
+        while (address <= size - 1) {
 
             let step = 1;
 
             let value = this.memory[address];
 
             if (IsUtils.isInstruction(value)) {
-                step = Settings.getInstructionLength();
+                step = this.getInstructionStep();
             } else {
                 value = ConvertUtils.toUI(value, Settings.getShowMemoryValueAs());
             }

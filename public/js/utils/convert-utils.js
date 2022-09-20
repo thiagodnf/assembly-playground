@@ -84,14 +84,8 @@ class ConvertUtils {
 
     static toUI(str, target = "dec") {
 
-        // str = str.replace(/0[bB]/g, "");
-
-        const numberAsInt = ConvertUtils.toInt(str);
-
-        // console.debug(parseInt(numberAsInt, 16));
-
         if (target === "dec") {
-            return numberAsInt;
+            return ConvertUtils.toInt(str);
         } else if (target === "bin") {
             return ConvertUtils.toBinary(str);
         } else if (target === "hex") {

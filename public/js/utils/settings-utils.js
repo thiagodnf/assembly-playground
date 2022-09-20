@@ -20,12 +20,12 @@ class Settings {
         return localStorage.getItem(key);
     }
 
-    static saveInstructionLength(value) {
+    static setInstructionLength(value){
         Settings.save(Settings.INSTRUCTION_LENGTH, value);
     }
 
     static getInstructionLength() {
-        return parseInt(Settings.get(Settings.INSTRUCTION_LENGTH) || 1);
+        return parseInt(Settings.get(Settings.INSTRUCTION_LENGTH) || 8);
     }
 
     static setShowMemoryValueAs(value){
@@ -41,7 +41,7 @@ class Settings {
     }
 
     static getRamMemorySize() {
-        return parseFloat(Settings.get(Settings.RAM_MEMORY_SIZE) || 1);
+        return parseFloat(Settings.get(Settings.RAM_MEMORY_SIZE) || 4);
     }
 
     static setRamMemorySize(value){

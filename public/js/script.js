@@ -26,23 +26,6 @@ function loadExample() {
     codeEditor.setValue(text.replaceAll("    ", ""));
 }
 
-function loadCode(code) {
-
-    cpu.reset();
-
-    let lines = code.split("\n")
-        .map(e => e.trim())
-        .map(e => e.replace(/\;(.*)/g, ''))
-        .filter(el => el.length !== 0);
-
-    let address = 0;
-
-    lines.forEach((line) => {
-        cpu.romMemory.setValue(address, line);
-        address += Settings.getInstructionLength();
-    });
-}
-
 function resizeWindow() {
 
     const w = $(window).height();
@@ -61,8 +44,8 @@ function resizeWindow() {
 
 $(function () {
 
-    romMemory = new RamMemory($("#rom-memory"), Math.pow(2, 8 * Settings.getRamMemorySize()));
-    ramMemory = new RamMemory($("#ram-memory"), Math.pow(2, 8 * Settings.getRomMemorySize()));
+    romMemory = new RamMemory($("#rom-memory"), Settings.getRomMemorySize());
+    ramMemory = new RamMemory($("#ram-memory"), Settings.getRamMemorySize());
     cpu = new CPU($("#cpu"), romMemory, ramMemory, 5);
 
     codeEditor = ace.edit("codeEditor");
@@ -71,9 +54,7 @@ $(function () {
 
     loadExample();
 
-    $("#load").click(() => {
-        loadCode(codeEditor.getValue());
-    })
+    $("#load").click(() => { cpu.loadCode(codeEditor.getValue()); })
 
     $("#step").click(() => { cpu.step() });
 
@@ -89,11 +70,6 @@ $(function () {
     }
 
     OutputUtils.msg("Welcome!");
-
-    $("#instruction-length").on("change", function () {
-        Settings.saveInstructionLength($(this).find("option:selected").val());
-        cpu.updateAll();
-    }).val(Settings.getInstructionLength());
 
     $("#word-size").on("change", function () {
         Settings.setWordSize($(this).find("option:selected").val());
