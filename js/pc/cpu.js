@@ -6,12 +6,12 @@ class CPU {
         this.numberOfRegistors = numberOfRegistors;
         this.romMemory = {};
         this.ramMemory = {};
-        this.registors = {};
+        this.registers = {};
     }
 
     reset() {
 
-        this.registors = {};
+        this.registers = {};
 
         this.setPC(0);
         this.setSR(0, 0)
@@ -51,31 +51,31 @@ class CPU {
     }
 
     setRegister(registorId, value = 0) {
-        this.registors[registorId.toUpperCase()] = ConvertUtils.toBinary(value);
+        this.registers[registorId.toUpperCase()] = ConvertUtils.toBinary(value);
     }
 
     getRegister(registorId) {
-        return this.registors[registorId];
+        return this.registers[registorId];
     }
 
     getLastRegister(){
-        return this.registors["R4"];
+        return this.registers["R4"];
     }
 
     setSR(n, z) {
-        this.registors["SR"] = {n, z};
+        this.registers["SR"] = {n, z};
     }
 
     getSR() {
-        return this.registors["SR"];
+        return this.registers["SR"];
     }
 
     setPC(value) {
-        this.registors["PC"] = value;
+        this.registers["PC"] = value;
     }
 
     getPC() {
-        return this.registors["PC"];
+        return this.registers["PC"];
     }
 
     step() {
@@ -123,8 +123,8 @@ class CPU {
 
         TableUtils.removeAllRows(this.$el);
 
-        for (const key in this.registors) {
-            TableUtils.appendRowCpu(this.$el, key, this.registors[key]);
+        for (const key in this.registers) {
+            TableUtils.appendRowCpu(this.$el, key, this.registers[key]);
         }
     }
 
