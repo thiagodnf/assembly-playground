@@ -69,6 +69,15 @@ $(function () {
 
     OutputUtils.msg("Welcome!");
 
+    $(".examples .dropdown-item").on("click", function () {
+
+        const filename = $(this).data("filename");
+
+        $.get(`data/examples/${filename}`, function (response) {
+            codeEditor.setValue(response);
+        })
+    });
+
     $("#word-size").on("change", function () {
         Settings.setWordSize($(this).find("option:selected").val());
         cpu.updateAll();
@@ -93,5 +102,4 @@ $(function () {
         Settings.setShowMemoryAddressAs($(this).val());
         cpu.updateAll();
     }).filter(`[value="${Settings.getShowMemoryAddressAs()}"]`).attr('checked', true);
-
 });

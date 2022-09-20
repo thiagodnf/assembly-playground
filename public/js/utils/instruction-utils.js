@@ -62,6 +62,10 @@ class InstructionUtils {
         throw new Error(`The operand '${operand}' is not valid`);
     }
 
+    static getValueAsInt(cpu, operand) {
+        return ConvertUtils.toInt(this.getValue(cpu, operand));
+    }
+
     static getImmediate(value) {
 
         value = value.replace("#", "");

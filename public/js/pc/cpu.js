@@ -51,7 +51,7 @@ class CPU {
     }
 
     setRegistor(registorId, value = 0) {
-        this.registors[registorId.toUpperCase()] = value;
+        this.registors[registorId.toUpperCase()] = ConvertUtils.toBinary(value);
     }
 
     getRegistor(registorId) {
@@ -59,19 +59,19 @@ class CPU {
     }
 
     setSR(n, z) {
-        this.setRegistor("SR", {n, z});
+        this.registors["SR"] = {n, z};
     }
 
     getSR() {
-        return this.getRegistor("SR");
+        return this.registors["SR"];
     }
 
     setPC(value) {
-        this.setRegistor("PC", value);
+        this.registors["PC"] = value;
     }
 
     getPC() {
-        return this.getRegistor("PC");
+        return this.registors["PC"];
     }
 
     step() {

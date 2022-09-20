@@ -12,16 +12,16 @@ class ADD {
 
     static execute(cpu, src, dst) {
 
-        if (!InstructionUtils.isImmediate(src) && !InstructionUtils.isRegister(src)) {
+        if (!IsUtils.isImmediate(src) && !IsUtils.isRegister(src)) {
             throw new Error("ADD: source would be immediate or register");
         }
 
-        if (!InstructionUtils.isRegister(dst)) {
+        if (!IsUtils.isRegister(dst)) {
             throw new Error("ADD: Destination would be register");
         }
 
-        const srcValue = InstructionUtils.getValue(cpu, src);
-        const dstValue = InstructionUtils.getValue(cpu, dst);
+        let srcValue = InstructionUtils.getValueAsInt(cpu, src);
+        let dstValue = InstructionUtils.getValueAsInt(cpu, dst);
 
         cpu.setRegistor(dst, dstValue + srcValue);
 
