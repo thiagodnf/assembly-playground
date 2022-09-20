@@ -1,15 +1,11 @@
 let cpu;
 let codeEditor;
 
-function loadExample() {
+function loadExample(filename) {
 
-    let text = `
-    MOV #0b0001, [0x0]
-    MOV #0b0001, [0x1]
-    JMP 0
-    `;
-
-    codeEditor.setValue(text.replaceAll("    ", ""));
+    $.get(`data/examples/${filename}`, function (response) {
+        codeEditor.setValue(response);
+    });
 }
 
 function resizeWindow() {
@@ -44,8 +40,6 @@ $(function () {
     codeEditor.setTheme("ace/theme/monokai");
     codeEditor.session.setMode("ace/mode/assembly_x86");
 
-    loadExample();
-
     $("#load").click(() => {
         cpu.loadCode(codeEditor.getValue());
         highlightPC();
@@ -75,10 +69,10 @@ $(function () {
 
         const filename = $(this).data("filename");
 
-        $.get(`data/examples/${filename}`, function (response) {
-            codeEditor.setValue(response);
-        })
+        loadExample(filename);
     });
+
+    loadExample("example.asm");
 
     $("#word-size").on("change", function () {
         Settings.setWordSize($(this).find("option:selected").val());

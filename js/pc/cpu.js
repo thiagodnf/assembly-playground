@@ -35,10 +35,71 @@ class CPU {
             .map(e => e.replace(/\;(.*)/g, ''))
             .filter(el => el.length !== 0);
 
+        let labels = {};
+
         let address = 0;
 
-        for (const line of lines) {
-            this.romMemory.setValue(address, line);
+        // Find all labels
+        for (let i = 0; i < lines.length; i++) {
+
+            let line = lines[i];
+
+            if (IsUtils.isLabel(line)) {
+
+                line = line.replace(":", "");
+
+                labels[line] = undefined;
+
+                if (!IsUtils.isLabel(lines[i + 1])) {
+                    labels[line] = lines[i + 1];
+                }
+            }
+        }
+
+        let instructions = {};
+
+        for (let line of lines) {
+
+            if (IsUtils.isLabel(line)) {
+                continue;
+            }
+
+            instructions[address] = line;
+
+            address += this.getInstructionStep();
+        }
+
+        for (let label in labels) {
+
+            let address = labels[label];
+
+            if (address) {
+
+                for (let i in instructions) {
+
+                    if (instructions[i] === address) {
+                        labels[label] = i;
+                    }
+                }
+            }
+        }
+
+        address = 0;
+
+        for (let key in instructions) {
+
+            let instruction = instructions[key];
+
+            for (const label in labels) {
+
+                let address = labels[label];
+
+                if (address) {
+                    instruction = instruction.replace(label, labels[label]);
+                }
+            }
+
+            this.romMemory.setValue(address, instruction);
             address += this.getInstructionStep();
         }
     }

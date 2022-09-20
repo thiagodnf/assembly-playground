@@ -36,6 +36,10 @@ class IsUtils {
         return IsUtils.is(`\\#${IsUtils.HEX}`, str) || IsUtils.is(`\\#${IsUtils.BIN}`, str) || IsUtils.is(`\\#${IsUtils.DEC}`, str)
     }
 
+    static isLabel(str) {
+        return new RegExp(`^[a-zA-Z]+\:$`).test(str)
+    }
+
     static isInstruction(value) {
 
         for (const command of this.COMMANDS) {
