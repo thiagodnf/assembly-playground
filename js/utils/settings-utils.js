@@ -10,7 +10,7 @@ class Settings {
 
     static SHOW_MEMORY_ADDRESS_AS = "show-memory-address-as";
 
-    static SHOW_MEMORY_VALUE_AS = "show-memory-value-as";
+    static SHOW_MEMORY_DATA_AS = "show-memory-data-as";
 
     static save(key, value) {
         localStorage.setItem(key, value);
@@ -52,12 +52,12 @@ class Settings {
         Settings.save(Settings.ROM_MEMORY_SIZE, value);
     }
 
-    static setShowMemoryValueAs(value){
-        Settings.save(Settings.SHOW_MEMORY_VALUE_AS, value);
+    static setShowMemoryDataAs(value){
+        Settings.save(Settings.SHOW_MEMORY_DATA_AS, value);
     }
 
-    static getShowMemoryValueAs(){
-        return Settings.get(Settings.SHOW_MEMORY_VALUE_AS) || "dec";
+    static getShowMemoryDataAs(){
+        return Settings.get(Settings.SHOW_MEMORY_DATA_AS) || "dec";
     }
 
     static setShowMemoryAddressAs(value){

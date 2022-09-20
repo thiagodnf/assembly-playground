@@ -11,7 +11,7 @@ class TableUtils {
         }else if (id === "PC") {
             value = ConvertUtils.toUI(value, Settings.getShowMemoryAddressAs());
         }else {
-            value = ConvertUtils.toUI(value, Settings.getShowMemoryValueAs());
+            value = ConvertUtils.toUI(value, Settings.getShowMemoryDataAs());
         }
 
         table.find('tbody').append(`

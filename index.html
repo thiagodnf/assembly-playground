@@ -146,13 +146,6 @@
                     </nav>
                     <div class="tab-content pt-3">
                         <div class="tab-pane fade show active" id="nav-general" role="tabpanel">
-                            <!-- <div class="mb-3">
-                                <label for="instruction-length" class="form-label">Instruction Length</label>
-                                <select class="form-select" id="instruction-length">
-                                    <option value="1" selected>1 Byte (8 bits)</option>
-                                    <option value="2">2 Bytes (16 bits)</option>
-                                </select>
-                            </div> -->
                             <div class="mb-3">
                                 <label for="word-size" class="form-label">Word Size</label>
                                 <select class="form-select" id="word-size">
@@ -195,12 +188,12 @@
                             <div class="mb-3">
                                 <label class="form-label d-block">Show data as:</label>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="memory-show-value-as" id="memory-value-dec" value="dec">
-                                    <label class="form-check-label" for="memory-value-dec">Decimal</label>
+                                    <input class="form-check-input" type="radio" name="memory-show-data-as" id="memory-data-dec" value="dec">
+                                    <label class="form-check-label" for="memory-data-dec">Decimal</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="memory-show-value-as" id="memory-value-bin" value="bin">
-                                    <label class="form-check-label" for="memory-value-bin">Binary</label>
+                                    <input class="form-check-input" type="radio" name="memory-show-data-as" id="memory-data-bin" value="bin">
+                                    <label class="form-check-label" for="memory-data-bin">Binary</label>
                                 </div>
                             </div>
                         </div>
@@ -220,6 +213,7 @@
                     <h5 class="modal-title"><i class="bi me-2 bi-book"></i>Documentation</h5>
                 </div>
                 <div class="modal-body">
+                    <p>Instruction Length is 8 bits (1 Byte)</p>
                     <p>Available Commands</p>
                     <ul>
                         <li>ADD [imd|reg], reg</li>
@@ -233,7 +227,7 @@
                     </ul>
                     <small>
                         1) "imd" is immediate, "reg" is register, "mem" is memory<br/>
-                        2) <code>INT 10h</code> always prints the information on register R4
+                        2) <code>INT 10h</code> always prints the information on register R6
                     </small>
                 </div>
                 <div class="modal-footer">

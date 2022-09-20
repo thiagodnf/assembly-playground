@@ -89,10 +89,10 @@ $(function () {
         cpu.updateAll();
     }).val(Settings.getRomMemorySize());
 
-    $('input[type=radio][name="memory-show-value-as"]').on('change', function () {
-        Settings.setShowMemoryValueAs($(this).val());
+    $('input[type=radio][name="memory-show-data-as"]').on('change', function () {
+        Settings.setShowMemoryDataAs($(this).val());
         cpu.updateAll();
-    }).filter(`[value="${Settings.getShowMemoryValueAs()}"]`).attr('checked', true);
+    }).filter(`[value="${Settings.getShowMemoryDataAs()}"]`).attr('checked', true);
 
     $('input[type=radio][name="memory-show-address-as"]').on('change', function () {
         Settings.setShowMemoryAddressAs($(this).val());

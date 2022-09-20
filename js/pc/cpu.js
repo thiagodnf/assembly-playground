@@ -7,6 +7,7 @@ class CPU {
         this.romMemory = {};
         this.ramMemory = {};
         this.registers = {};
+
     }
 
     reset() {
@@ -125,7 +126,7 @@ class CPU {
     }
 
     getLastRegister() {
-        return this.registers["R4"];
+        return this.registers["R"+(this.numberOfRegistors-1)];
     }
 
     setSR(n, z) {

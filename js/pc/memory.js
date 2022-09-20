@@ -69,7 +69,7 @@ class RamMemory {
             if (IsUtils.isInstruction(value)) {
                 step = this.cpu.getInstructionStep();
             } else {
-                value = ConvertUtils.toUI(value, Settings.getShowMemoryValueAs());
+                value = ConvertUtils.toUI(value, Settings.getShowMemoryDataAs());
             }
 
             TableUtils.appendMemoryRow(this.$el, address, value, step);
