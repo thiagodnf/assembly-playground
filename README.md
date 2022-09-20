@@ -1,17 +1,17 @@
 # Assembly Playground
 
-Convert from .ical to .csv files on your browser. No data sent out to external servers
+Play with assembly programming language on your browser and see CPU registers and memory in action
 
 
-[![GitHub Release](https://img.shields.io/github/release/thiagodnf/ical-to-csv.svg)](https://github.com/thiagodnf/ical-to-csv/releases/latest)
-[![GitHub contributors](https://img.shields.io/github/contributors/thiagodnf/ical-to-csv.svg)](https://github.com/thiagodnf/ical-to-csv/graphs/contributors)
-[![GitHub stars](https://img.shields.io/github/stars/thiagodnf/ical-to-csv.svg)](https://github.com/thiagodnf/ical-to-csv)
+[![GitHub Release](https://img.shields.io/github/release/thiagodnf/assembly-playground.svg)](https://github.com/thiagodnf/assembly-playground/releases/latest)
+[![GitHub contributors](https://img.shields.io/github/contributors/thiagodnf/assembly-playground.svg)](https://github.com/thiagodnf/assembly-playground/graphs/contributors)
+[![GitHub stars](https://img.shields.io/github/stars/thiagodnf/assembly-playground.svg)](https://github.com/thiagodnf/assembly-playground)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)
 
 ## How To Use
 
-Access the app [here](https://thiagodnf.github.io/ical-to-csv).
+Access the app [here](https://thiagodnf.github.io/assembly-playground).
 
 ## Screenshots
 
@@ -44,10 +44,6 @@ Contributions to the this project are very welcome! We can't do this alone! Feel
 ## License
 
 Licensed under the [MIT license](LICENSE).
-
-## Acknowledgement
-
-Thanks [Peter Braden](https://github.com/peterbraden) for providing your amazing [library](https://github.com/peterbraden/ical.js/).
 
 ## Donate
 
