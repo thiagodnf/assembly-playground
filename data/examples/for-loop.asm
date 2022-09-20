@@ -5,7 +5,7 @@
 ;  }
 MOV #0, R2 ; int inc;
 MOV #0, R3 ; int i;
-CMP #10, R3
+CMP #5, R3
 JZ 7
 ADD #2, R2
 ADD #1, R3
