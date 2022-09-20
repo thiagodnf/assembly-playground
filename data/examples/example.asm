@@ -1,6 +1,6 @@
 main:
     MOV #0, R2
-    MOV #10, R3
+    MOV #6, R3
     JMP sum
 
 sum:
