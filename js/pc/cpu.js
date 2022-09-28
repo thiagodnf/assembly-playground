@@ -58,7 +58,12 @@ class CPU {
 
         this.reset();
 
-        let lines = AssemblyUtils.compile(codeAsStr);
+        let lines = codeAsStr.split("\n")
+             .map(e => e.trim())
+             .map(e => e.replace(/\;(.*)/g, ''))
+             .filter(el => el.length !== 0);
+
+        // let lines = AssemblyUtils.compile(codeAsStr);
 
         // lines = this.moveLabelsToTheFirstInstruction(lines);
 

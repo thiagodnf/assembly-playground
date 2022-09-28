@@ -73,9 +73,9 @@ class AssemblyUtils {
         // return `${parts[1]} ${parts[2]} ${parts[3]} }`
     }
 
-    static ONLY_INSTRUCTION = /^([\w]{2,3})\s+([\#\d\w]+)\s*\,?\s*([\#\d\w]*)$/;
+    static ONLY_INSTRUCTION = /^([\w]{2,3})\s+([\#\[\]\d\w]+)\s*\,?\s*([\#\[\]\d\w]*)$/;
 
-    static LABEL_AND_INSTRUCTION = /^([\w\d\_]*)\:\s+([\w]{2,3})\s+([\#\d\w]+)\s*\,?\s*([\#\d\w]*)$/;
+    static LABEL_AND_INSTRUCTION = /^([\w\d\_]*)\:\s+([\w]{2,3})\s+([\#\[\]\d\w]+)\s*\,?\s*([\#\[\]\d\w]*)$/;
 
     static ONLY_LABEL = /^([\w\d\_]+)\:$/
 
