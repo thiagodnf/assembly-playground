@@ -58,4 +58,8 @@ class InstructionUtils {
 
         return ConvertUtils.toBinary(value);
     }
+
+    static hasOnlyLabel(str){
+        return /^.*\:$/.test(str);
+    }
 }

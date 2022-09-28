@@ -1,5 +1,7 @@
 class JN {
 
+    static REGEX = /^JN\s0[xX][0-9a-fA-F]+|JN\s[a-zA-Z\_0-9]+$/;
+
     static execute(cpu, dst) {
 
         if (!IsUtils.isDec(dst) && !IsUtils.isHex(dst)) {

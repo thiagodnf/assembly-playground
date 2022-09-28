@@ -27,14 +27,42 @@ class CPU {
         this.update();
     }
 
+    moveLabelsToTheFirstInstruction(lines) {
+
+        let output = [];
+
+        let counter = 0;
+
+        while (counter < lines.length) {
+
+            let line = lines[counter];
+            let step = 1;
+
+            if (InstructionUtils.hasOnlyLabel(line)) {
+
+                if (line + 1 < lines.length) {
+                    output.push(`${line} ${lines[counter + 1]}`);
+                    step = 2;
+                }
+            } else {
+                output.push(`${line}`);
+            }
+
+            counter += step;
+        }
+
+        return output;
+    }
+
     loadCode(codeAsStr) {
 
         this.reset();
 
-        let lines = codeAsStr.split("\n")
-            .map(e => e.trim())
-            .map(e => e.replace(/\;(.*)/g, ''))
-            .filter(el => el.length !== 0);
+        let lines = AssemblyUtils.compile(codeAsStr);
+
+        // lines = this.moveLabelsToTheFirstInstruction(lines);
+
+        // console.debug(lines);
 
         let labels = {};
 
@@ -126,7 +154,7 @@ class CPU {
     }
 
     getLastRegister() {
-        return this.registers["R"+(this.numberOfRegistors-1)];
+        return this.registers["R" + (this.numberOfRegistors - 1)];
     }
 
     setSR(n, z) {

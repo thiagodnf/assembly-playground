@@ -13,6 +13,8 @@
  */
 class SUB {
 
+    static REGEX = "(?:SUB\\s+[IM]\\s*,\\s*[REG])|(?:SUB\\s+[REG]\\s*,\\s*[REG])";
+
     static execute(cpu, src, dst) {
 
         if (!IsUtils.isImmediate(src) && !IsUtils.isRegister(src)) {

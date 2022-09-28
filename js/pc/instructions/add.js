@@ -10,6 +10,8 @@
  */
 class ADD {
 
+    static REGEX = "(?:ADD\\s+[IM]\\s*,\\s*[REG])|(?:ADD\\s+[REG]\\s*,\\s*[REG])";
+
     static execute(cpu, src, dst) {
 
         if (!IsUtils.isImmediate(src) && !IsUtils.isRegister(src)) {
