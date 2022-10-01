@@ -1,6 +1,6 @@
 {
     "name": "assembly-playground",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "author": "Thiago Ferreira",
     "license": "MIT",
     "description": "Play with assembly programming language on your browser and see CPU registers and memory in action",
