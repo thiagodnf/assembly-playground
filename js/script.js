@@ -1,3 +1,5 @@
+
+
 let cpu;
 let codeEditor;
 
@@ -54,11 +56,13 @@ $(function () {
 
     window.onerror = function (message, url, lineNumber) {
         OutputUtils.error(message);
+        console.error(message)
         return true;
     };
 
     window.console.log = function (key) {
         OutputUtils.msg(key);
+        console.debug(key);
     }
 
     OutputUtils.msg("Welcome!");

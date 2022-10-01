@@ -58,82 +58,18 @@ class CPU {
 
         this.reset();
 
-        let lines = codeAsStr.split("\n")
-             .map(e => e.trim())
-             .map(e => e.replace(/\;(.*)/g, ''))
-             .filter(el => el.length !== 0);
+        const output = new MSP430Assembler.default.Assembler().compile(codeAsStr);
 
-        // let lines = AssemblyUtils.compile(codeAsStr);
-
-        // lines = this.moveLabelsToTheFirstInstruction(lines);
-
-        // console.debug(lines);
-
-        let labels = {};
+        if (output.errors.length > 0) {
+            console.log(output.errors.join("\n"))
+            return;
+        }
 
         let address = 0;
 
-        // Find all labels
-        for (let i = 0; i < lines.length; i++) {
+        for (let instruction of output.instructions) {
 
-            let line = lines[i];
-
-            if (IsUtils.isLabel(line)) {
-
-                line = line.replace(":", "");
-
-                labels[line] = undefined;
-
-                if (!IsUtils.isLabel(lines[i + 1])) {
-                    labels[line] = lines[i + 1];
-                }
-            }
-        }
-
-        let instructions = {};
-
-        for (let line of lines) {
-
-            if (IsUtils.isLabel(line)) {
-                continue;
-            }
-
-            instructions[address] = line;
-
-            address += this.getInstructionStep();
-        }
-
-        for (let label in labels) {
-
-            let address = labels[label];
-
-            if (address) {
-
-                for (let i in instructions) {
-
-                    if (instructions[i] === address) {
-                        labels[label] = i;
-                    }
-                }
-            }
-        }
-
-        address = 0;
-
-        for (let key in instructions) {
-
-            let instruction = instructions[key];
-
-            for (const label in labels) {
-
-                let address = labels[label];
-
-                if (address) {
-                    instruction = instruction.replace(label, labels[label]);
-                }
-            }
-
-            this.romMemory.setValue(address, instruction);
+            this.romMemory.setValue(address, instruction.toString());
             address += this.getInstructionStep();
         }
     }
@@ -185,30 +121,39 @@ class CPU {
 
         let value = this.romMemory.getValue(pc);
 
-        let instruction = InstructionUtils.parse(value);
+        let instruction;
 
-        if (IsUtils.isInstruction(instruction[0])) {
-
-            if (instruction[0] === "MOV") {
-                nextPC = MOV.execute(this, instruction[1], instruction[2]);
-            } else if (instruction[0] === "ADD") {
-                nextPC = ADD.execute(this, instruction[1], instruction[2]);
-            } else if (instruction[0] === "SUB") {
-                nextPC = SUB.execute(this, instruction[1], instruction[2]);
-            } else if (instruction[0] === "CMP") {
-                nextPC = CMP.execute(this, instruction[1], instruction[2]);
-            } else if (instruction[0] === "JN") {
-                nextPC = JN.execute(this, instruction[1]);
-            } else if (instruction[0] === "JZ") {
-                nextPC = JZ.execute(this, instruction[1]);
-            } else if (instruction[0] === "JMP") {
-                nextPC = JMP.execute(this, instruction[1]);
-            } else if (instruction[0] === "INT") {
-                nextPC = INT.execute(this, instruction[1]);
-            } else {
-                throw new Error(`Command ${instruction[0]} not found`);
-            }
+        try{
+            instruction = MSP430Assembler.default.InstructionUtils.getInstruction([0, value]);
+        }catch(error){
+            console.debug(error);
+            return;
         }
+
+        let mnemonic = instruction[1].mnemonic;
+        let operands = instruction[1].operands;
+        // if (IsUtils.isInstruction(instruction[0])) {
+
+            if (mnemonic === "MOV") {
+                nextPC = MOV.execute(this, operands[0], operands[1]);
+            } else if (mnemonic === "ADD") {
+                nextPC = ADD.execute(this,  operands[0], operands[1]);
+            } else if (mnemonic === "SUB") {
+                nextPC = SUB.execute(this,  operands[0], operands[1]);
+            } else if (mnemonic === "CMP") {
+                nextPC = CMP.execute(this,  operands[0], operands[1]);
+            } else if (mnemonic === "JN") {
+                nextPC = JN.execute(this,  operands[0]);
+            } else if (mnemonic === "JZ") {
+                nextPC = JZ.execute(this,  operands[0]);
+            } else if (mnemonic === "JMP") {
+                nextPC = JMP.execute(this,  operands[0]);
+            } else if (mnemonic=== "INT") {
+                nextPC = INT.execute(this,  operands[0]);
+            } else {
+                throw new Error(`Command ${ operands[0]} not found`);
+            }
+        // }
 
         this.setPC(nextPC);
 

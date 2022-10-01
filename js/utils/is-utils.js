@@ -13,26 +13,45 @@ class IsUtils {
     }
 
     static isDec(str) {
+
+        return MSP430Assembler.default.RegexUtils.isInteger(str);
+
         return IsUtils.is(IsUtils.DEC, str);
     }
 
     static isHex(str) {
+
+        return MSP430Assembler.default.RegexUtils.isHexadecimal(str);
         return IsUtils.is(`${IsUtils.HEX}`, str);
     }
 
     static isBin(str) {
+
+        return MSP430Assembler.default.RegexUtils.isBinary(str);
+
         return IsUtils.is(`${IsUtils.BIN}`, str);
     }
 
     static isMemory(str) {
+
+        return MSP430Assembler.default.RegexUtils.isAddress(str);
+
         return IsUtils.is(`\\[${IsUtils.HEX}\\]`, str) || IsUtils.is(`\\[${IsUtils.DEC}\\]`, str);
     }
 
     static isRegister(str) {
+
+        return MSP430Assembler.default.RegexUtils.isRegister(str);
+
         return IsUtils.is(`R${IsUtils.DEC}`, str)
     }
 
     static isImmediate(str) {
+
+        // console.debug(MSP430Assembler.default);
+
+        return MSP430Assembler.default.RegexUtils.isImmediate(str);
+
         return IsUtils.is(`\\#${IsUtils.HEX}`, str) || IsUtils.is(`\\#${IsUtils.BIN}`, str) || IsUtils.is(`\\#${IsUtils.DEC}`, str)
     }
 
