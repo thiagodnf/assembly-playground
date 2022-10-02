@@ -235,11 +235,17 @@
                         <li>JN address</li>
                         <li>JZ address</li>
                         <li>MOV [imd|reg|mem], [reg|mem]</li>
-                        <li>INT 10h</li>
+                        <li>Print Commands
+                            <ul>
+                                <li><code>INT 10h</code> prints the information on register R6</li>
+                                <li><code>INT 20h</code> prints " " (space)</li>
+                                <li><code>INT 30h</code> prints "<code>\n</code>"</li>
+                                <li><code>INT 40h</code> to clear the screen</li>
+                            </ul>
+                        </li>
                     </ul>
                     <small>
                         1) "imd" is immediate, "reg" is register, "mem" is memory<br/>
-                        2) <code>INT 10h</code> always prints the information on register R6
                     </small>
                 </div>
                 <div class="modal-footer">
