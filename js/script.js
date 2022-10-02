@@ -2,6 +2,7 @@
 
 let cpu;
 let codeEditor;
+let isPlaying = false;
 
 function loadExample(filename) {
 
@@ -26,9 +27,19 @@ function resizeWindow() {
     $(".panel-output").height($(".panel-left").height() * 0.25 - 20);
 }
 
-function highlightPC(){
+function highlightPC() {
     $(".panel-rom-memory").find(`td`).removeClass("current-pc");
     $(".panel-rom-memory").find(`td[data-address=${cpu.getPC()}]`).addClass("current-pc");
+}
+
+function step() {
+    cpu.step()
+    highlightPC();
+}
+
+function updateScreen(){
+    cpu.updateAll();
+    highlightPC();
 }
 
 $(function () {
@@ -48,9 +59,34 @@ $(function () {
     })
 
     $("#step").click(() => {
-        cpu.step()
-        highlightPC();
+        step();
     });
+
+    $("#play").click(function(){
+
+        if (!isPlaying) {
+
+            isPlaying = setInterval(() => {
+                step();
+            }, Settings.getCpuSpeed());
+
+            $(this).addClass("d-none");
+            $("#stop").removeClass("d-none");
+            $("#step").prop("disabled", "disabled");
+            $("#load").prop("disabled", "disabled");
+            $("#settings").prop("disabled", "disabled");
+        }
+    });
+
+    $("#stop").click(function(){
+        clearInterval(isPlaying);
+        isPlaying = null;
+        $(this).addClass("d-none");
+        $("#play").removeClass("d-none");
+        $("#step").prop("disabled", "");
+        $("#load").prop("disabled", "");
+        $("#settings").prop("disabled", "");
+    }).addClass("d-none");
 
     $(window).resize(resizeWindow).trigger('resize');
 
@@ -78,28 +114,33 @@ $(function () {
 
     loadExample("example.asm");
 
+    $("#cpu-speed").on("change", function () {
+        Settings.setCpuSpeed($(this).find("option:selected").val());
+        updateScreen();
+    }).val(Settings.getCpuSpeed());
+
     $("#word-size").on("change", function () {
         Settings.setWordSize($(this).find("option:selected").val());
-        cpu.updateAll();
+        updateScreen();
     }).val(Settings.getWordSize());
 
     $("#ram-memory-size").on("change", function () {
         Settings.setRamMemorySize($(this).find("option:selected").val());
-        cpu.updateAll();
+        updateScreen();
     }).val(Settings.getRamMemorySize());
 
     $("#rom-memory-size").on("change", function () {
         Settings.setRomMemorySize($(this).find("option:selected").val());
-        cpu.updateAll();
+        updateScreen();
     }).val(Settings.getRomMemorySize());
 
     $('input[type=radio][name="memory-show-data-as"]').on('change', function () {
         Settings.setShowMemoryDataAs($(this).val());
-        cpu.updateAll();
+        updateScreen();
     }).filter(`[value="${Settings.getShowMemoryDataAs()}"]`).attr('checked', true);
 
     $('input[type=radio][name="memory-show-address-as"]').on('change', function () {
         Settings.setShowMemoryAddressAs($(this).val());
-        cpu.updateAll();
+        updateScreen();
     }).filter(`[value="${Settings.getShowMemoryAddressAs()}"]`).attr('checked', true);
 });

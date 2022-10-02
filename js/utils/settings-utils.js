@@ -4,6 +4,8 @@ class Settings {
 
     static WORD_SIZE = "word-size";
 
+    static CPU_SPEED = "cpu-speed";
+
     static ROM_MEMORY_SIZE = "rom-memory-size";
 
     static RAM_MEMORY_SIZE = "ram-memory-size";
@@ -34,6 +36,14 @@ class Settings {
 
     static setWordSize(value){
         Settings.save(Settings.WORD_SIZE, value);
+    }
+
+    static getCpuSpeed() {
+        return parseInt(Settings.get(Settings.CPU_SPEED) || 1000);
+    }
+
+    static setCpuSpeed(value){
+        Settings.save(Settings.CPU_SPEED, value);
     }
 
     static getRamMemorySize() {

@@ -48,8 +48,20 @@
         <div class="container-fluid">
             <div>
                 <button class="btn btn-sm btn-primary" id="load"><i class="bi me-2 bi-box-arrow-in-up"></i>Load</button>
+                <button class="btn btn-sm btn-primary" id="play"><i class="bi me-2 bi-play-fill"></i>Play</button>
+                <button class="btn btn-sm btn-primary" id="stop"><i class="bi me-2 bi-stop-fill"></i>Stop</button>
                 <button class="btn btn-sm btn-primary" id="step"><i class="bi me-2 bi-chevron-bar-right"></i>Step</button>
-                <button class="btn btn-sm btn-primary float-end" id="step" data-bs-toggle="modal" data-bs-target="#modal-settings"><i class="bi me-2 bi-gear"></i>Settings</button>
+
+                <button class="btn btn-sm btn-primary float-end ms-3" id="settings" data-bs-toggle="modal" data-bs-target="#modal-settings"><i class="bi me-2 bi-gear"></i>Settings</button>
+                <div class="float-end">
+                    <select class="form-select form-select-sm" id="cpu-speed">
+                        <option value="1000">CPU 1 Hz</option>
+                        <option value="500">CPU 2 Hz</option>
+                        <option value="250">CPU 4 Hz</option>
+                        <option value="125">CPU 8 Hz</option>
+                        <option value="62">CPU 16 Hz</option>
+                    </select>
+                </div>
             </div>
             <div class="row mt-3 panels">
                 <div class="col-6 panel-left">

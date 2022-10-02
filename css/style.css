@@ -90,7 +90,10 @@ table tr th:last-child {
     border-color: #712cf9 !important;
     background-color: #6419f8 !important;
 }
-
+.btn-primary[disabled] {
+    border-color: #712cff !important;
+    background-color: #6419ff !important;
+}
 
 .form-label {
     font-weight: bold;
