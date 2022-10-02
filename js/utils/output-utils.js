@@ -1,16 +1,48 @@
-class OutputUtils{
+let outputEditor;
 
-    static msg(txt){
+outputEditor = ace.edit("outputEditor");
+outputEditor.setTheme("ace/theme/monokai");
+outputEditor.session.setUseWorker(false);
+outputEditor.setShowPrintMargin(false);
+outputEditor.setReadOnly(true);
+outputEditor.resize(true);
+outputEditor.renderer.setShowGutter(false);
+
+class OutputUtils {
+
+    static lineNumber = 0;
+
+    static msg(txt) {
         $("#output").append(`<p class='my-0'>${txt}</p>`);
         OutputUtils.scroll();
     }
 
-    static error(txt){
-        $("#output").append(`<p class='my-0 text-danger'>${txt}</p>`);
+    static error(txt) {
+        OutputUtils.append("error", txt+"\n");
+    }
+
+    static clear() {
+        outputEditor.setValue("");
+    }
+
+    static append(type, key, value) {
+
+        var Range = ace.require('ace/range').Range;
+
+        let currentLine = OutputUtils.lineNumber++;
+
+        outputEditor.setValue(outputEditor.getValue() + key, -1);
+
+        if(type == "error"){
+            outputEditor.session.addMarker(new Range(currentLine, 0, currentLine, 1), "myMarker", "fullLine");
+        }
+
+        outputEditor.scrollToLine(50, true, true, function () { });
+
         OutputUtils.scroll();
     }
 
-    static scroll(){
-        $("#output").animate({scrollTop: document.body.scrollHeight},"fast");
+    static scroll() {
+        $("#output").animate({ scrollTop: document.body.scrollHeight }, "fast");
     }
 }

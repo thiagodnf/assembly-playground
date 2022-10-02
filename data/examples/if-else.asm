@@ -20,4 +20,6 @@ label2:  MOV #1, R6
         JMP print
 
 print:  INT 10h
+        INT 10h
+        INT 20h
         JMP main

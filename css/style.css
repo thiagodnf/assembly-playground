@@ -22,10 +22,16 @@ body {
     font-size: 14px;
 }
 
-#codeEditor {
+#codeEditor, #outputEditor {
     width: 100%;
     height: 100%;
 }
+
+.myMarker {
+    position:absolute;
+    background: #F82267 !important;
+    z-index:20
+  }
 
 #output {
     color: white !important;

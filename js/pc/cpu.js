@@ -61,7 +61,7 @@ class CPU {
         const output = new MSP430Assembler.default.Assembler().compile(codeAsStr);
 
         if (output.errors.length > 0) {
-            console.log(output.errors.join("\n"))
+            OutputUtils.error(output.errors.join("\n"))
             return;
         }
 
@@ -126,7 +126,7 @@ class CPU {
         try{
             instruction = MSP430Assembler.default.InstructionUtils.getInstruction([0, value]);
         }catch(error){
-            console.debug(error);
+            OutputUtils.error(error);
             return;
         }
 

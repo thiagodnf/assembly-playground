@@ -96,10 +96,9 @@ $(function () {
         return true;
     };
 
-    window.console.log = function (key) {
-        OutputUtils.msg(key);
-        console.debug(key);
-    }
+    // window.console.append = function (type, key, value) {
+    //     OutputUtils.append(type, key, value);
+    // }
 
     OutputUtils.msg("Welcome!");
 
