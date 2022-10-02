@@ -22,7 +22,7 @@ class OutputUtils {
     }
 
     static clear() {
-        outputEditor.setValue("");
+        outputEditor.setValue("", -1);
     }
 
     static append(type, key, value) {
