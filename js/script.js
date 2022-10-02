@@ -111,7 +111,7 @@ $(function () {
         loadExample(filename);
     });
 
-    loadExample("example.asm");
+    loadExample("if-else.asm");
 
     $("#cpu-speed").on("change", function () {
         Settings.setCpuSpeed($(this).find("option:selected").val());

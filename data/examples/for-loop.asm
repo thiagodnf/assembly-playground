@@ -3,9 +3,10 @@
 ;  for(i = 0; i < 5; i++){
 ;     inc = inc + 2;
 ;  }
-;  print("%d", inc);
-main:   MOV #0, R2 ; int inc;
-        MOV #0, R3 ; int i;
+;  print("%d\n", inc);
+
+main:   MOV #0, R2      ; int inc;
+        MOV #0, R3      ; int i;
 
 for:    CMP #5, R3
         JZ print
@@ -15,4 +16,5 @@ for:    CMP #5, R3
 
 print:  MOV R2, R6
         INT 10h
+        INT 30h     ; Break line
         JMP main
