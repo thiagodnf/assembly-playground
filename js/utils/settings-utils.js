@@ -31,7 +31,7 @@ class Settings {
     }
 
     static getWordSize() {
-        return parseInt(Settings.get(Settings.WORD_SIZE) || 4);
+        return parseInt(Settings.get(Settings.WORD_SIZE) || 8);
     }
 
     static setWordSize(value){
@@ -47,7 +47,7 @@ class Settings {
     }
 
     static getRamMemorySize() {
-        return parseFloat(Settings.get(Settings.RAM_MEMORY_SIZE) || 4);
+        return parseFloat(Settings.get(Settings.RAM_MEMORY_SIZE) || 8);
     }
 
     static setRamMemorySize(value){
@@ -55,7 +55,7 @@ class Settings {
     }
 
     static getRomMemorySize() {
-        return parseFloat(Settings.get(Settings.ROM_MEMORY_SIZE) || 4);
+        return parseFloat(Settings.get(Settings.ROM_MEMORY_SIZE) || 8);
     }
 
     static setRomMemorySize(value){
