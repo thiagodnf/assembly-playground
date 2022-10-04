@@ -42,6 +42,10 @@ function updateScreen(){
     highlightPC();
 }
 
+function setEnabled($el, enabled){
+    $el.prop("disabled", enabled? "" : "disabled");
+}
+
 $(function () {
 
     cpu = new CPU($("#cpu"), 7);
@@ -52,10 +56,22 @@ $(function () {
     codeEditor = ace.edit("codeEditor");
     codeEditor.setTheme("ace/theme/monokai");
     codeEditor.session.setMode("ace/mode/assembly_x86");
+    codeEditor.session.setUseSoftTabs(true);
 
     $("#load").click(() => {
-        cpu.loadCode(codeEditor.getValue());
-        highlightPC();
+
+        OutputUtils.append("default", "Loading...")
+
+        setEnabled($("#load"), false);
+
+        cpu.loadCode(codeEditor.getValue()).then(() => {
+            OutputUtils.append("default", "Done!\n")
+            setEnabled($("#load"), true);
+            highlightPC();
+        }).catch((error)=>{
+            OutputUtils.append("error", "\n"+error)
+            setEnabled($("#load"), true);
+        });
     })
 
     $("#step").click(() => {

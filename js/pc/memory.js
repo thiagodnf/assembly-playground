@@ -30,8 +30,6 @@ class RamMemory {
 
     setValue(address, value) {
 
-        console.debug("setValue", { address, value });
-
         address = ConvertUtils.toInt(address);
 
         this.memory[address] = ConvertUtils.toBinary(value);

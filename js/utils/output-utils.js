@@ -2,11 +2,12 @@ let outputEditor;
 
 outputEditor = ace.edit("outputEditor");
 outputEditor.setTheme("ace/theme/monokai");
-outputEditor.session.setUseWorker(false);
 outputEditor.setShowPrintMargin(false);
 outputEditor.setReadOnly(true);
 outputEditor.resize(true);
 outputEditor.renderer.setShowGutter(false);
+outputEditor.session.setUseWorker(false);
+outputEditor.session.setUseSoftTabs(true);
 
 class OutputUtils {
 

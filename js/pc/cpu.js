@@ -54,24 +54,33 @@ class CPU {
         return output;
     }
 
-    loadCode(codeAsStr) {
+    async loadCode(codeAsStr) {
 
-        this.reset();
+        return new Promise((resolve, reject) => {
 
-        const output = new MSP430Assembler.default.Assembler().compile(codeAsStr);
+            setTimeout(() => {
 
-        if (output.errors.length > 0) {
-            OutputUtils.error(output.errors.join("\n"))
-            return;
-        }
+                this.reset();
 
-        let address = 0;
+                let output = new MSP430Assembler.default.Assembler().compile(codeAsStr);
 
-        for (let instruction of output.instructions) {
+                if (output.errors.length > 0) {
+                    reject(output.errors.join("\n"))
+                    return;
+                }
 
-            this.romMemory.setValue(address, instruction.toString());
-            address += this.getInstructionStep();
-        }
+                let address = 0;
+
+                for (let instruction of output.instructions) {
+
+                    this.romMemory.setValue(address, instruction.toString());
+                    address += this.getInstructionStep();
+                }
+
+                resolve();
+
+            }, 10);
+        });
     }
 
     getInstructionStep() {
