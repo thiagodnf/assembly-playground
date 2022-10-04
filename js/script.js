@@ -62,15 +62,15 @@ $(function () {
 
         OutputUtils.append("default", "Loading...")
 
-        setEnabled($("#load"), false);
+        setEnabled($(".toolbar .btn, .toolbar select"), false);
 
         cpu.loadCode(codeEditor.getValue()).then(() => {
             OutputUtils.append("default", "Done!\n")
-            setEnabled($("#load"), true);
+            setEnabled($(".toolbar .btn"), true);
             highlightPC();
         }).catch((error)=>{
             OutputUtils.append("error", "\n"+error)
-            setEnabled($("#load"), true);
+            setEnabled($(".toolbar .btn, .toolbar select"), true);
         });
     })
 
@@ -106,11 +106,11 @@ $(function () {
 
     $(window).resize(resizeWindow).trigger('resize');
 
-    window.onerror = function (message, url, lineNumber) {
-        OutputUtils.error(message);
-        console.error(message)
-        return true;
-    };
+    // window.onerror = function (message, url, lineNumber) {
+    //     OutputUtils.error(message);
+    //     console.error(message)
+    //     return true;
+    // };
 
     // window.console.append = function (type, key, value) {
     //     OutputUtils.append(type, key, value);

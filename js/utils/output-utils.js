@@ -34,9 +34,9 @@ class OutputUtils {
 
         outputEditor.setValue(outputEditor.getValue() + key, -1);
 
-        if(type == "error"){
-            outputEditor.session.addMarker(new Range(currentLine, 0, currentLine, 1), "myMarker", "fullLine");
-        }
+        // if(type == "error"){
+        //     outputEditor.session.addMarker(new Range(currentLine, 0, currentLine, 1), "myMarker", "fullLine");
+        // }
 
         outputEditor.scrollToLine(50, true, true, function () { });
 

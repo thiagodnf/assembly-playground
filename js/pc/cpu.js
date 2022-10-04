@@ -69,6 +69,7 @@ class CPU {
                     return;
                 }
 
+                console.log("oi")
                 let address = 0;
 
                 for (let instruction of output.instructions) {
@@ -132,9 +133,9 @@ class CPU {
 
         let instruction;
 
-        try{
+        try {
             instruction = MSP430Assembler.default.InstructionUtils.getInstruction([0, value]);
-        }catch(error){
+        } catch (error) {
             OutputUtils.error(error);
             return;
         }
@@ -143,25 +144,25 @@ class CPU {
         let operands = instruction[1].operands;
         // if (IsUtils.isInstruction(instruction[0])) {
 
-            if (mnemonic === "MOV") {
-                nextPC = MOV.execute(this, operands[0], operands[1]);
-            } else if (mnemonic === "ADD") {
-                nextPC = ADD.execute(this,  operands[0], operands[1]);
-            } else if (mnemonic === "SUB") {
-                nextPC = SUB.execute(this,  operands[0], operands[1]);
-            } else if (mnemonic === "CMP") {
-                nextPC = CMP.execute(this,  operands[0], operands[1]);
-            } else if (mnemonic === "JN") {
-                nextPC = JN.execute(this,  operands[0]);
-            } else if (mnemonic === "JZ") {
-                nextPC = JZ.execute(this,  operands[0]);
-            } else if (mnemonic === "JMP") {
-                nextPC = JMP.execute(this,  operands[0]);
-            } else if (mnemonic=== "INT") {
-                nextPC = INT.execute(this,  operands[0]);
-            } else {
-                throw new Error(`Command ${ operands[0]} not found`);
-            }
+        if (mnemonic === "MOV") {
+            nextPC = MOV.execute(this, operands[0], operands[1]);
+        } else if (mnemonic === "ADD") {
+            nextPC = ADD.execute(this, operands[0], operands[1]);
+        } else if (mnemonic === "SUB") {
+            nextPC = SUB.execute(this, operands[0], operands[1]);
+        } else if (mnemonic === "CMP") {
+            nextPC = CMP.execute(this, operands[0], operands[1]);
+        } else if (mnemonic === "JN") {
+            nextPC = JN.execute(this, operands[0]);
+        } else if (mnemonic === "JZ") {
+            nextPC = JZ.execute(this, operands[0]);
+        } else if (mnemonic === "JMP") {
+            nextPC = JMP.execute(this, operands[0]);
+        } else if (mnemonic === "INT") {
+            nextPC = INT.execute(this, operands[0]);
+        } else {
+            throw new Error(`Command ${operands[0]} not found`);
+        }
         // }
 
         this.setPC(nextPC);
