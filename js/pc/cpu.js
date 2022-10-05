@@ -8,6 +8,7 @@ class CPU {
         this.ramMemory = {};
         this.registers = {};
 
+        this.compiler = new MSP430Assembler.default.Assembler();
     }
 
     reset() {
@@ -62,7 +63,7 @@ class CPU {
 
                 this.reset();
 
-                let output = new MSP430Assembler.default.Assembler().compile(codeAsStr);
+                let output = this.compiler.compile(codeAsStr);
 
                 if (output.errors.length > 0) {
                     reject(output.errors.join("\n"))
