@@ -1,49 +1,37 @@
-let outputEditor;
-
-outputEditor = ace.edit("outputEditor");
-outputEditor.setTheme("ace/theme/dracula");
-outputEditor.setShowPrintMargin(false);
-outputEditor.setReadOnly(true);
-outputEditor.resize(true);
-outputEditor.renderer.setShowGutter(false);
-outputEditor.session.setUseWorker(false);
-outputEditor.session.setUseSoftTabs(true);
-
 class OutputUtils {
 
-    static lineNumber = 0;
+    static $el = $("#output");
 
     static msg(txt) {
-        $("#output").append(`<p class='my-0'>${txt}</p>`);
-        OutputUtils.scroll();
+        OutputUtils.append("error", txt);
     }
 
     static error(txt) {
-        OutputUtils.append("error", txt+"\n");
+        OutputUtils.append("error", txt);
     }
 
     static clear() {
-        outputEditor.setValue("", -1);
+        OutputUtils.$el.text("");
     }
 
-    static append(type, key, value) {
+    static append(type, text) {
 
-        var Range = ace.require('ace/range').Range;
+        let cls = "";
 
-        let currentLine = OutputUtils.lineNumber++;
+        if (type == "error") {
+            cls = "bg-danger";
+        } else if (type === "warning") {
+            cls = "bg-warning";
+        }
 
-        outputEditor.setValue(outputEditor.getValue() + key, -1);
+        let str = String(text).replaceAll("\n", "<br/>");
 
-        // if(type == "error"){
-        //     outputEditor.session.addMarker(new Range(currentLine, 0, currentLine, 1), "myMarker", "fullLine");
-        // }
-
-        outputEditor.scrollToLine(100, true, true, function () { });
+        OutputUtils.$el.append(`<span class="${cls}">${str}</span>`);
 
         OutputUtils.scroll();
     }
 
     static scroll() {
-        $("#output").animate({ scrollTop: document.body.scrollHeight }, "fast");
+        OutputUtils.$el.scrollTop(OutputUtils.$el[0].scrollHeight);
     }
 }

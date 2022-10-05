@@ -34,13 +34,12 @@ body {
   }
 
 #output {
+    font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
     color: white !important;
     background-color: #272822 !important;
     overflow-y: scroll;
     height: 100%;
     width: 100%;
-    resize: none;
-    /* Remove this if you want the user to resize the textarea */
 }
 
 table td,
