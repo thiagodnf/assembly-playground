@@ -69,7 +69,6 @@ class CPU {
                     return;
                 }
 
-                console.log("oi")
                 let address = 0;
 
                 for (let instruction of output.instructions) {
@@ -80,7 +79,7 @@ class CPU {
 
                 resolve();
 
-            }, 1);
+            }, 0);
         });
     }
 

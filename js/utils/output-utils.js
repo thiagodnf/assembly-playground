@@ -2,8 +2,8 @@ class OutputUtils {
 
     static $el = $("#output");
 
-    static msg(txt) {
-        OutputUtils.append("error", txt);
+    static text(txt) {
+        OutputUtils.append("default", txt);
     }
 
     static error(txt) {

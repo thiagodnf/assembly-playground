@@ -139,17 +139,7 @@ $(function () {
 
     $(window).resize(resizeWindow).trigger('resize');
 
-    // window.onerror = function (message, url, lineNumber) {
-    //     OutputUtils.error(message);
-    //     console.error(message)
-    //     return true;
-    // };
-
-    // window.console.append = function (type, key, value) {
-    //     OutputUtils.append(type, key, value);
-    // }
-
-    OutputUtils.append("default", "Welcome!\n");
+    OutputUtils.text("Welcome!\n");
 
     highlightPC();
 
@@ -159,8 +149,6 @@ $(function () {
 
         loadExample(filename);
     });
-
-
 
     $("#cpu-speed").on("change", function () {
         Settings.setCpuSpeed($(this).find("option:selected").val());
