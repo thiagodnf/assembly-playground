@@ -43,7 +43,7 @@ function updateScreen() {
 }
 
 function setEnabled($el, enabled) {
-    $el.prop("disabled", enabled ? "" : "disabled");
+    $el.prop("disabled", enabled ? false : "disabled");
 }
 
 function loadInitialSourceCode() {
@@ -77,11 +77,13 @@ $(function () {
 
     loadInitialSourceCode();
 
-    $("#load").click(() => {
+    $("#load").click((event) => {
+
+        event.preventDefault();
 
         OutputUtils.append("default", "Loading...")
 
-        setEnabled($(".toolbar .btn, .toolbar select"), false);
+        setEnabled($(".toolbar .btn"), false);
 
         cpu.loadCode(codeEditor.getValue()).then(() => {
             OutputUtils.append("default", "Done!\n")
@@ -89,7 +91,7 @@ $(function () {
             highlightPC();
         }).catch((error) => {
             OutputUtils.append("error", "\n" + error)
-            setEnabled($(".toolbar .btn, .toolbar select"), true);
+            setEnabled($(".toolbar .btn"), true);
         });
     })
 
