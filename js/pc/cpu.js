@@ -131,6 +131,10 @@ class CPU {
 
         let value = this.romMemory.getValue(pc);
 
+        if(IsUtils.isBin(value)){
+            return;
+        }
+
         let instruction;
 
         try {
@@ -142,7 +146,6 @@ class CPU {
 
         let mnemonic = instruction[1].mnemonic;
         let operands = instruction[1].operands;
-        // if (IsUtils.isInstruction(instruction[0])) {
 
         if (mnemonic === "MOV") {
             nextPC = MOV.execute(this, operands[0], operands[1]);
@@ -163,7 +166,6 @@ class CPU {
         } else {
             throw new Error(`Command ${operands[0]} not found`);
         }
-        // }
 
         this.setPC(nextPC);
 

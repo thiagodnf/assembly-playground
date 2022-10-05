@@ -22,16 +22,10 @@ body {
     font-size: 14px;
 }
 
-#codeEditor, #outputEditor {
+#codeEditor {
     width: 100%;
     height: 100%;
 }
-
-.myMarker {
-    position:absolute;
-    background: #F82267 !important;
-    z-index:20
-  }
 
 #output {
     font: 12px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
