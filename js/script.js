@@ -65,12 +65,12 @@ $(function () {
     cpu.reset();
 
     codeEditor = ace.edit("codeEditor");
-    codeEditor.setTheme("ace/theme/monokai");
+    codeEditor.setTheme("ace/theme/dracula");
     codeEditor.session.setMode("ace/mode/assembly_x86");
     codeEditor.session.setUseSoftTabs(true);
 
-    // When the user type anything in the source code editor,
-    // let's save in the browser
+    // When the user type anything in the source
+    // code editor, let's save in the browser
     codeEditor.getSession().on('change', function (e) {
         Settings.setSourceCode(codeEditor.getValue());
     });

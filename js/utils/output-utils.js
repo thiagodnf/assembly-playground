@@ -1,7 +1,7 @@
 let outputEditor;
 
 outputEditor = ace.edit("outputEditor");
-outputEditor.setTheme("ace/theme/monokai");
+outputEditor.setTheme("ace/theme/dracula");
 outputEditor.setShowPrintMargin(false);
 outputEditor.setReadOnly(true);
 outputEditor.resize(true);
