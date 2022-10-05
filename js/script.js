@@ -8,6 +8,7 @@ function loadExample(filename) {
 
     $.get(`data/examples/${filename}`, function (response) {
         codeEditor.setValue(response);
+        codeEditor.getSession().selection.clearSelection();
     });
 }
 
@@ -52,6 +53,7 @@ function loadInitialSourceCode() {
 
     if (storedSourceCode) {
         codeEditor.setValue(storedSourceCode);
+        codeEditor.getSession().selection.clearSelection();
     } else {
         loadExample("if-else.asm");
     }

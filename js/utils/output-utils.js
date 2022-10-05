@@ -38,7 +38,7 @@ class OutputUtils {
         //     outputEditor.session.addMarker(new Range(currentLine, 0, currentLine, 1), "myMarker", "fullLine");
         // }
 
-        outputEditor.scrollToLine(50, true, true, function () { });
+        outputEditor.scrollToLine(100, true, true, function () { });
 
         OutputUtils.scroll();
     }
