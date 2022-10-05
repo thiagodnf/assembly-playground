@@ -14,12 +14,22 @@ class Settings {
 
     static SHOW_MEMORY_DATA_AS = "show-memory-data-as";
 
+    static SOURCE_CODE = "source-code";
+
     static save(key, value) {
         localStorage.setItem(key, value);
     }
 
     static get(key) {
         return localStorage.getItem(key);
+    }
+
+    static setSourceCode(value){
+        Settings.save(Settings.SOURCE_CODE, value);
+    }
+
+    static getSourceCode(){
+        return Settings.get(Settings.SOURCE_CODE) || "";
     }
 
     static setInstructionLength(value){

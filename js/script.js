@@ -37,13 +37,24 @@ function step() {
     highlightPC();
 }
 
-function updateScreen(){
+function updateScreen() {
     cpu.updateAll();
     highlightPC();
 }
 
-function setEnabled($el, enabled){
-    $el.prop("disabled", enabled? "" : "disabled");
+function setEnabled($el, enabled) {
+    $el.prop("disabled", enabled ? "" : "disabled");
+}
+
+function loadInitialSourceCode() {
+
+    const storedSourceCode = Settings.getSourceCode();
+
+    if (storedSourceCode) {
+        codeEditor.setValue(storedSourceCode);
+    } else {
+        loadExample("if-else.asm");
+    }
 }
 
 $(function () {
@@ -58,6 +69,14 @@ $(function () {
     codeEditor.session.setMode("ace/mode/assembly_x86");
     codeEditor.session.setUseSoftTabs(true);
 
+    // When the user type anything in the source code editor,
+    // let's save in the browser
+    codeEditor.getSession().on('change', function (e) {
+        Settings.setSourceCode(codeEditor.getValue());
+    });
+
+    loadInitialSourceCode();
+
     $("#load").click(() => {
 
         OutputUtils.append("default", "Loading...")
@@ -68,8 +87,8 @@ $(function () {
             OutputUtils.append("default", "Done!\n")
             setEnabled($(".toolbar .btn"), true);
             highlightPC();
-        }).catch((error)=>{
-            OutputUtils.append("error", "\n"+error)
+        }).catch((error) => {
+            OutputUtils.append("error", "\n" + error)
             setEnabled($(".toolbar .btn, .toolbar select"), true);
         });
     })
@@ -78,7 +97,7 @@ $(function () {
         step();
     });
 
-    $("#play").click(function(){
+    $("#play").click(function () {
 
         if (!isPlaying) {
 
@@ -94,7 +113,7 @@ $(function () {
         }
     });
 
-    $("#stop").click(function(){
+    $("#stop").click(function () {
         clearInterval(isPlaying);
         isPlaying = null;
         $(this).addClass("d-none");
@@ -127,7 +146,7 @@ $(function () {
         loadExample(filename);
     });
 
-    loadExample("if-else.asm");
+
 
     $("#cpu-speed").on("change", function () {
         Settings.setCpuSpeed($(this).find("option:selected").val());
