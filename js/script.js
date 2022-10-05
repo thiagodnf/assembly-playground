@@ -101,23 +101,33 @@ $(function () {
 
     $("#play").click(function () {
 
-        if (!isPlaying) {
-
-            isPlaying = setInterval(() => {
-                step();
-            }, Settings.getCpuSpeed());
-
-            $(this).addClass("d-none");
-            $("#stop").removeClass("d-none");
-            $("#step").prop("disabled", "disabled");
-            $("#load").prop("disabled", "disabled");
-            $("#settings").prop("disabled", "disabled");
+        if(isPlaying){
+            return;
         }
+
+        isPlaying = true;
+
+        $(this).addClass("d-none");
+        $("#stop").removeClass("d-none");
+        $("#step").prop("disabled", "disabled");
+        $("#load").prop("disabled", "disabled");
+        $("#settings").prop("disabled", "disabled");
+
+        var play = function() {
+
+            if(isPlaying){
+                step();
+                setTimeout(play, Settings.getCpuSpeed());
+            }
+        }
+
+        setTimeout(play, 1);
     });
 
     $("#stop").click(function () {
-        clearInterval(isPlaying);
-        isPlaying = null;
+
+        isPlaying = false;
+
         $(this).addClass("d-none");
         $("#play").removeClass("d-none");
         $("#step").prop("disabled", "");
@@ -137,7 +147,7 @@ $(function () {
     //     OutputUtils.append(type, key, value);
     // }
 
-    OutputUtils.msg("Welcome!");
+    OutputUtils.append("default", "Welcome!\n");
 
     highlightPC();
 
