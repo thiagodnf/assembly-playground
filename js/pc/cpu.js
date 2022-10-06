@@ -140,7 +140,7 @@ class CPU {
         try {
             instruction = MSP430Assembler.default.InstructionUtils.getInstruction([0, value]);
         } catch (error) {
-            OutputUtils.error(error);
+            new Output().error(error);
             return;
         }
 

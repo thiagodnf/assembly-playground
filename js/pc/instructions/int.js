@@ -2,21 +2,23 @@ class INT {
 
     static execute(cpu, src) {
 
+        const output = new Output();
+
         if (!["10h", "20h", "30h", "40h"].includes(src)) {
-            throw new Error("INT: source should be '10h', '20h', or '30h'");
+            throw new Error("INT: source should be '10h', '20h', '30h', or, '40h'");
         }
 
         if (src === "10h") {
-            OutputUtils.append("default", ConvertUtils.toInt(cpu.getLastRegister()));
+            output.print(ConvertUtils.toInt(cpu.getLastRegister()));
         }
         if (src === "20h") {
-            OutputUtils.append("default", " ");
+            output.print(" ");
         }
         if (src === "30h") {
-            OutputUtils.append("default", "\n");
+            output.println("");
         }
         if (src === "40h") {
-            OutputUtils.clear();
+            output.clear();
         }
 
         return cpu.getPC() + cpu.getInstructionStep();

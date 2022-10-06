@@ -97,7 +97,14 @@
                     <div class="row mt-3">
                         <div class="col-12">
                             <div class="card panel-output">
-                                <div class="card-header">Output</div>
+                                <div class="card-header">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span>Output</span>
+                                        <button class="btn btn-sm btn-light" id="clear">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
                                 <div class="card-body" id="output"></div>
                             </div>
                         </div>
@@ -263,10 +270,12 @@
     <script type="text/javascript" src="js/ace/ace.js" charset="utf-8"></script>
     <script type="text/javascript" src="https://thiagodnf.github.io/msp430-mini-assembler/dist/MSP430Assembler.js" charset="utf-8"></script>
 
+    <script type="text/javascript" src="js/components/output.js"></script>
+    <script type="text/javascript" src="js/components/code-editor.js"></script>
+
     <script type="text/javascript" src="js/utils/table-utils.js"></script>
     <script type="text/javascript" src="js/utils/instruction-utils.js"></script>
     <script type="text/javascript" src="js/utils/convert-utils.js"></script>
-    <script type="text/javascript" src="js/utils/output-utils.js"></script>
     <script type="text/javascript" src="js/utils/settings-utils.js"></script>
     <script type="text/javascript" src="js/utils/is-utils.js"></script>
     <script type="text/javascript" src="js/utils/assembly-utils.js"></script>

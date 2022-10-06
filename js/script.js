@@ -3,12 +3,12 @@
 let cpu;
 let codeEditor;
 let isPlaying = false;
+let output;
 
 function loadExample(filename) {
 
     $.get(`data/examples/${filename}`, function (response) {
         codeEditor.setValue(response);
-        codeEditor.getSession().selection.clearSelection();
     });
 }
 
@@ -53,7 +53,6 @@ function loadInitialSourceCode() {
 
     if (storedSourceCode) {
         codeEditor.setValue(storedSourceCode);
-        codeEditor.getSession().selection.clearSelection();
     } else {
         loadExample("if-else.asm");
     }
@@ -61,19 +60,19 @@ function loadInitialSourceCode() {
 
 $(function () {
 
+    output = new Output();
+    codeEditor = new CodeEditor();
+
+    output.println("Welcome!");
+
     cpu = new CPU($("#cpu"), 7);
     cpu.romMemory = new RamMemory($("#rom-memory"), cpu, Settings.getRomMemorySize());
     cpu.ramMemory = new RamMemory($("#ram-memory"), cpu, Settings.getRamMemorySize());
     cpu.reset();
 
-    codeEditor = ace.edit("codeEditor");
-    codeEditor.setTheme("ace/theme/dracula");
-    codeEditor.session.setMode("ace/mode/assembly_x86");
-    codeEditor.session.setUseSoftTabs(true);
-
-    // When the user type anything in the source
+    // When the user types anything in the source
     // code editor, let's save in the browser
-    codeEditor.getSession().on('change', function (e) {
+    codeEditor.onChange(function (e) {
         Settings.setSourceCode(codeEditor.getValue());
     });
 
@@ -83,16 +82,16 @@ $(function () {
 
         event.preventDefault();
 
-        OutputUtils.append("default", "Loading...")
+        output.print("Loading...");
 
         setEnabled($(".toolbar .btn"), false);
 
         cpu.loadCode(codeEditor.getValue()).then(() => {
-            OutputUtils.append("default", "Done!\n")
-            setEnabled($(".toolbar .btn"), true);
+            output.print("Done!\n");
             highlightPC();
         }).catch((error) => {
-            OutputUtils.append("error", "\n" + error)
+            output.error(error);
+        }).then(() => {
             setEnabled($(".toolbar .btn"), true);
         });
     })
@@ -103,7 +102,7 @@ $(function () {
 
     $("#play").click(function () {
 
-        if(isPlaying){
+        if (isPlaying) {
             return;
         }
 
@@ -115,9 +114,9 @@ $(function () {
         $("#load").prop("disabled", "disabled");
         $("#settings").prop("disabled", "disabled");
 
-        var play = function() {
+        var play = function () {
 
-            if(isPlaying){
+            if (isPlaying) {
                 step();
                 setTimeout(play, Settings.getCpuSpeed());
             }
@@ -138,8 +137,6 @@ $(function () {
     }).addClass("d-none");
 
     $(window).resize(resizeWindow).trigger('resize');
-
-    OutputUtils.text("Welcome!\n");
 
     highlightPC();
 
