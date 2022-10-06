@@ -1,9 +1,9 @@
 class RamMemory {
 
-    constructor($el, cpu, memorySize) {
+    constructor($el, pc, memorySize) {
 
         this.$el = $el;
-        this.cpu = cpu;
+        this.cpu = pc;
         this.memorySize = memorySize;
         this.memory = {};
 

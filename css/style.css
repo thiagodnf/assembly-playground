@@ -6,11 +6,18 @@ body {
     font-size: 14px;
 }
 
-.current-pc{
-    background-color: #F9ECC3  !important
+.card-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    height: 32px !important;
 }
 
-.navbar-nav .nav-link{
+.current-pc {
+    background-color: #F9ECC3 !important
+}
+
+.navbar-nav .nav-link {
     color: white !important;
 }
 
@@ -18,7 +25,7 @@ body {
     color: #712cf9;
 }
 
-.navbar-nav .dropdown-item{
+.navbar-nav .dropdown-item {
     font-size: 14px;
 }
 
@@ -89,6 +96,7 @@ table tr th:last-child {
     border-color: #712cf9 !important;
     background-color: #6419f8 !important;
 }
+
 .btn-primary[disabled] {
     border-color: #712cff !important;
     background-color: #6419ff !important;

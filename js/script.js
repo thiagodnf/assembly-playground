@@ -1,6 +1,4 @@
-
-
-let cpu;
+let pc;
 let codeEditor;
 let isPlaying = false;
 let output;
@@ -16,30 +14,30 @@ function resizeWindow() {
 
     const w = $(window).height();
 
-    $(".panels").height(w - 150);
+    $(".panels").height(w - 180);
 
-    $(".panel-ram-memory").height($(".panels").height());
-    $(".panel-rom-memory").height($(".panels").height());
+    $(".panel-ram-memory .card-body").height($(".panels").height());
+    $(".panel-rom-memory .card-body").height($(".panels").height());
     $(".panel-left").height($(".panels").height());
 
     $(".panel-source-code").height($(".panel-left").height() * 0.75);
     $(".panel-cpu").height($(".panel-left").height() * 0.75);
 
-    $(".panel-output").height($(".panel-left").height() * 0.25 - 20);
+    $(".panel-output .card-body").height($(".panel-left").height() * 0.25 - 20);
 }
 
 function highlightPC() {
     $(".panel-rom-memory").find(`td`).removeClass("current-pc");
-    $(".panel-rom-memory").find(`td[data-address=${cpu.getPC()}]`).addClass("current-pc");
+    $(".panel-rom-memory").find(`td[data-address=${pc.getPC()}]`).addClass("current-pc");
 }
 
 function step() {
-    cpu.step()
+    pc.step()
     highlightPC();
 }
 
 function updateScreen() {
-    cpu.updateAll();
+    pc.updateAll();
     highlightPC();
 }
 
@@ -65,10 +63,10 @@ $(function () {
 
     output.println("Welcome!");
 
-    cpu = new CPU($("#cpu"), 7);
-    cpu.romMemory = new RamMemory($("#rom-memory"), cpu, Settings.getRomMemorySize());
-    cpu.ramMemory = new RamMemory($("#ram-memory"), cpu, Settings.getRamMemorySize());
-    cpu.reset();
+    pc = new PC($("#pc"), 7);
+    pc.romMemory = new RamMemory($("#rom-memory"), pc, Settings.getRomMemorySize());
+    pc.ramMemory = new RamMemory($("#ram-memory"), pc, Settings.getRamMemorySize());
+    pc.reset();
 
     // When the user types anything in the source
     // code editor, let's save in the browser
@@ -86,7 +84,7 @@ $(function () {
 
         setEnabled($(".toolbar .btn"), false);
 
-        cpu.loadCode(codeEditor.getValue()).then(() => {
+        pc.loadCode(codeEditor.getValue()).then(() => {
             output.print("Done!\n");
             highlightPC();
         }).catch((error) => {

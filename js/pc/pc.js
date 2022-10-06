@@ -1,4 +1,4 @@
-class CPU {
+class PC {
 
     constructor($el, numberOfRegistors) {
 
