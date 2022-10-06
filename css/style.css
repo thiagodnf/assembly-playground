@@ -13,6 +13,13 @@ body {
     height: 32px !important;
 }
 
+table tr td {
+    vertical-align: middle !important;
+    max-height: 30px !important;
+}
+
+
+
 .current-pc {
     background-color: #F9ECC3 !important
 }

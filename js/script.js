@@ -2,6 +2,7 @@ let pc;
 let codeEditor;
 let isPlaying = false;
 let output;
+let cpu;
 
 function loadExample(filename) {
 
@@ -57,6 +58,8 @@ function loadInitialSourceCode() {
 }
 
 $(function () {
+
+    cpu = new CPU(3);
 
     output = new Output();
     codeEditor = new CodeEditor();
